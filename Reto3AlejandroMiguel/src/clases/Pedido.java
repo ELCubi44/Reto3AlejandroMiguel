@@ -1,6 +1,6 @@
 package clases;
 
-import java.time.*;
+import java.sql.*;
 
 public class Pedido {
 
@@ -8,9 +8,9 @@ public class Pedido {
 	private Cliente cliente;
 	private double precioTotal;
 	private String direccionEnvio;
-	private LocalDate fecha;
+	private Date fecha;
 	
-	public Pedido(int idPedido, Cliente cliente, double precioTotal, String direccionEnvio, LocalDate fecha) {
+	public Pedido(int idPedido, Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
 		super();
 		this.idPedido = idPedido;
 		this.cliente = cliente;
@@ -55,11 +55,11 @@ public class Pedido {
 		this.direccionEnvio = direccionEnvio;
 	}
 
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
