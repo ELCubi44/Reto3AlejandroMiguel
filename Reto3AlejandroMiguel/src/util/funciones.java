@@ -237,7 +237,7 @@ public class funciones {
 		int catBuscar = funciones.dimeEntero("Elige una (Seleccione ID):", sc);
 		for (Categoria c : categorias) {
 			if (c.getIdCategoria() == catBuscar) {
-				for (Producto p : ProductoDao.lista(catBuscar)) {
+				for (Producto p : ProductoDao.listaCategoria(catBuscar)) {
 					System.out.println(p);
 				}
 			}
@@ -245,6 +245,24 @@ public class funciones {
 	}
 
 	public static void buscarProd(Scanner sc) {
-		
+		Producto pro = new Producto();
+		System.out.println("Introduce el nombre del producto:");
+		String nombre = sc.nextLine();
+		pro.setNombre(nombre);
+		System.out.println("Introduce el color del producto:");
+		String color = sc.nextLine();
+		pro.setColor(color);
+		System.out.println("Introduce la talla del producto:");
+		String talla = sc.nextLine();
+		pro.setTall(talla);
+		// terminar
+	}
+
+	public static void crearPedido(Scanner sc) {
+
+	}
+
+	public static void verPedidos(Scanner sc) {
+
 	}
 }

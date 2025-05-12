@@ -86,10 +86,10 @@ public class inicio {
 			opcion = funciones.dimeEntero("1-Listar productos por categoría\r\n2-Buscar productos\r\n3-Volver", sc);
 			switch (opcion) {
 			case 1:
-
+				funciones.listarProductos(sc);
 				break;
 			case 2:
-
+				funciones.buscarProd(sc);
 				break;
 			case 3:
 				System.out.println("Volviendo...");
@@ -107,10 +107,10 @@ public class inicio {
 			opcion = funciones.dimeEntero("1-Crear pedido\r\n2-Ver pedidos\r\n3-Volver", sc);
 			switch (opcion) {
 			case 1:
-
+				funciones.crearPedido(sc);
 				break;
 			case 2:
-
+				funciones.verPedidos(sc);
 				break;
 			case 3:
 				System.out.println("Volviendo...");
