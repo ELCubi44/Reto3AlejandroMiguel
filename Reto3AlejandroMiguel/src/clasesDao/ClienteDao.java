@@ -1,16 +1,30 @@
 package clasesDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-import clases.Categoria;
-import clases.Cliente;
-import clases.Conexion;
+import java.sql.*;
+import java.util.*;
+import clases.*;
 
 public class ClienteDao {
 
+	public static List<Cliente> lista () {
+		List <Cliente> clientes = new ArrayList <Cliente>();
+		try {
+			Connection con = Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement("SELECT idcliente,nombre,direccion,codigo FROM proyecto3ev.clientes;");
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				clientes.add(new Cliente (rs.getInt("idcliente"),rs.getString("nombre"),rs.getString("direccion"),rs.getInt("codigo")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			Conexion.cierraConexion();
+		}
+	return clientes;
+}
+	
 	public static void inserta (Cliente cliente) {
 		try {
 			Connection con = Conexion.abreConexion();
