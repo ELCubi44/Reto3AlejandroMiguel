@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import clases.Categoria;
+import clases.Cliente;
+import clases.Producto;
 
 public class funciones {
 
@@ -172,7 +174,26 @@ public class funciones {
 	}
 
 	public static void gestionCat(Scanner sc) {
-		Categoria cat = new Categoria(funciones.dimeEntero("Introduce el ID de la categoría:", sc),
-				funciones.dimeString("Introduce el nombre de la categoría:", sc));
+		Categoria cat = new Categoria();
+		cat.setNombre(funciones.dimeString("Introduce el nombre de la categoría:", sc));
+	}
+
+	public static void gestionPro(Scanner sc) {
+		Producto pro = new Producto();
+		System.out.println("Lista de categorías:");
+		for (Categoria c : lista) {
+			System.out.println(c.getIdCategoria()+c.getNombre());
+		}
+		int idBuscar=funciones.dimeEntero("Selecciona una", sc);
+		for(Categoria c: lista) {
+			if(c.getIdCategoria()==idBuscar) {
+				insertar
+			}
+		}
+	}
+
+	public static void altaClientes(Scanner sc) {
+		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
+				funciones.dimeString("Introduce la dirección:", sc), funciones.dimeEntero("Introduce el código:", sc));
 	}
 }
