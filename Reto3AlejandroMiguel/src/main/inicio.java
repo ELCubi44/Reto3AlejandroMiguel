@@ -8,74 +8,143 @@ public class inicio {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int opcion = 0;
-		int opcion2 = 0;
-		int opcion3 = 0;
 		do {
 			opcion = funciones.dimeEntero(
-					"1-Mantenimientos\r\n2-Catálogo de productos\r\n3-Pedidos\r\n4-Informes\r\n5-Salir", sc);
+					"Menú:\r\n1-Mantenimientos\r\n2-Catálogo de productos\r\n3-Pedidos\r\n4-Informes\r\n5-Salir", sc);
 			switch (opcion) {
 			case 1:
-				opcion2 = funciones
-						.dimeEntero("1-Gestión de categorías\r\n2-Gestión de productos\r\n3-Gestión de clientes", sc);
-				switch (opcion2) {
-				case 1:
-
-					break;
-				case 2:
-
-					break;
-				case 3:
-					opcion3 = funciones.dimeEntero("1-Alta de nuevos clientes\r\n2-Búsqueda por código", sc);
-					switch (opcion3) {
-					case 1:
-
-						break;
-					case 2:
-
-						break;
-					}
-					break;
-				}
-				break;
+				submenu1(sc);
 			case 2:
-				opcion2 = funciones.dimeEntero("1-Listar productos por categoría\r\n2-Buscar productos", sc);
-				switch (opcion2) {
-				case 1:
-
-					break;
-				case 2:
-
-					break;
-				}
+				submenu2(sc);
 				break;
 			case 3:
-				opcion2 = funciones.dimeEntero("1-Crear pedido\r\n2-Ver pedidos", sc);
-				switch (opcion2) {
-				case 1:
-
-					break;
-				case 2:
-
-					break;
-				}
+				submenu3(sc);
 				break;
-
 			case 4:
-				opcion2 = funciones.dimeEntero("1-Bajo stock\r\n2-Pedidos por cliente\r\n3-Producto más vendido", sc);
-				switch (opcion2) {
-				case 1:
-
-					break;
-				case 2:
-
-					break;
-				}
+				submenu4(sc);
 				break;
 			case 5:
 				System.out.println("Saliendo...");
+				break;
+			default:
+				System.out.println("Opción no válida");
 				break;
 			}
 		} while (opcion != 5);
 
 	}
+
+	public static void submenu1(Scanner sc) {
+		int opcion = 0;
+		do {
+			opcion = funciones.dimeEntero(
+					"1-Gestión de categorías\r\n2-Gestión de productos\r\n3-Gestión de clientes\r\n4-Volver", sc);
+			switch (opcion) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+				submenu11(sc);
+				break;
+			case 4:
+				System.out.println("Volviendo...");
+				break;
+			default:
+				System.out.println("Opción no válida");
+				break;
+			}
+		} while (opcion != 4);
+	}
+
+	public static void submenu11(Scanner sc) {
+		int opcion = 0;
+		do {
+			opcion = funciones.dimeEntero("1-Alta de nuevos clientes\r\n2-Búsqueda por código\r\n3-Volver", sc);
+			switch (opcion) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+				System.out.println("Volviendo...");
+				break;
+			default:
+				System.out.println("Opción no válida");
+				break;
+			}
+		} while (opcion != 3);
+	}
+
+	public static void submenu2(Scanner sc) {
+		int opcion = 0;
+		do {
+			opcion = funciones.dimeEntero("1-Listar productos por categoría\r\n2-Buscar productos\r\n3-Volver", sc);
+			switch (opcion) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+				System.out.println("Volviendo...");
+				break;
+			default:
+				System.out.println("Opción no válida");
+				break;
+			}
+		} while (opcion != 3);
+	}
+
+	public static void submenu3(Scanner sc) {
+		int opcion = 0;
+		do {
+			opcion = funciones.dimeEntero("1-Crear pedido\r\n2-Ver pedidos\r\n3-Volver", sc);
+			switch (opcion) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+				System.out.println("Volviendo...");
+				break;
+			default:
+				System.out.println("Opción no válida");
+				break;
+			}
+		} while (opcion != 3);
+	}
+
+	public static void submenu4(Scanner sc) {
+		int opcion = 0;
+		do {
+			opcion = funciones.dimeEntero("1-Bajo stock\r\n2-Pedidos por cliente\r\n3-Producto más vendido\r\n4-Volver",
+					sc);
+			switch (opcion) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+				System.out.println("Volviendo...");
+				break;
+			default:
+				System.out.println("Opción no válida");
+				break;
+			}
+		} while (opcion != 4);
+	}
+	
 }
