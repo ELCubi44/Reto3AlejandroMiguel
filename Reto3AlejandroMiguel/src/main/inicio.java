@@ -41,10 +41,10 @@ public class inicio {
 					"1-Gestión de categorías\r\n2-Gestión de productos\r\n3-Gestión de clientes\r\n4-Volver", sc);
 			switch (opcion) {
 			case 1:
-
+				funciones.gestionCat(sc);
 				break;
 			case 2:
-
+				funciones.gestionPro(sc);
 				break;
 			case 3:
 				submenu11(sc);
@@ -65,10 +65,10 @@ public class inicio {
 			opcion = funciones.dimeEntero("1-Alta de nuevos clientes\r\n2-Búsqueda por código\r\n3-Volver", sc);
 			switch (opcion) {
 			case 1:
-
+				funciones.altaClientes(sc);
 				break;
 			case 2:
-
+				funciones.busCod(sc);
 				break;
 			case 3:
 				System.out.println("Volviendo...");
@@ -146,5 +146,5 @@ public class inicio {
 			}
 		} while (opcion != 4);
 	}
-	
+
 }

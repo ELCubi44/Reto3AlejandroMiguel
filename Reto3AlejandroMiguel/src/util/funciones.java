@@ -12,6 +12,9 @@ import java.util.Scanner;
 import clases.Categoria;
 import clases.Cliente;
 import clases.Producto;
+import clasesDao.CategoriaDao;
+import clasesDao.ClienteDao;
+import clasesDao.ProductoDao;
 
 public class funciones {
 
@@ -176,18 +179,26 @@ public class funciones {
 	public static void gestionCat(Scanner sc) {
 		Categoria cat = new Categoria();
 		cat.setNombre(funciones.dimeString("Introduce el nombre de la categoría:", sc));
+		CategoriaDao.inserta(cat);
 	}
 
 	public static void gestionPro(Scanner sc) {
 		Producto pro = new Producto();
+		pro.setNombre(funciones.dimeString("Introduce nombre del producto:", sc));
+		pro.setColor(funciones.dimeString("Introduce color del producto:", sc));
+		pro.setDescripcion(funciones.dimeString("Introduce descripción del producto", sc));
+		pro.setPrecio(funciones.dimeDouble("Introduce precio del producto", sc));
+		pro.setStock(funciones.dimeEntero("Introduce cantidad del producto", sc));
+		pro.setTall(funciones.dimeString("Introduce talla del producto:", sc));
 		System.out.println("Lista de categorías:");
-		for (Categoria c : lista) {
-			System.out.println(c.getIdCategoria()+c.getNombre());
+		for (Categoria c : CategoriaDao.lista()) {
+			System.out.println(c.getIdCategoria() + c.getNombre());
 		}
-		int idBuscar=funciones.dimeEntero("Selecciona una", sc);
-		for(Categoria c: lista) {
-			if(c.getIdCategoria()==idBuscar) {
-				insertar
+		int idBuscar = funciones.dimeEntero("Selecciona una", sc);
+		for (Categoria c : CategoriaDao.lista()) {
+			if (c.getIdCategoria() == idBuscar) {
+				pro.setCategoria(c);
+				ProductoDao.inserta(pro);
 			}
 		}
 	}
@@ -195,5 +206,45 @@ public class funciones {
 	public static void altaClientes(Scanner sc) {
 		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
 				funciones.dimeString("Introduce la dirección:", sc), funciones.dimeEntero("Introduce el código:", sc));
+		ClienteDao.inserta(cliente);
+	}
+
+	public static void busCod(Scanner sc) {
+		int codBuscar = funciones.dimeEntero("Introduce el código de cliente a buscar:", sc);
+		boolean buscar = false;
+		for (Cliente c : ClienteDao.lista()) {
+			if (c.getCodigo() == codBuscar) {
+				System.out.println(c);
+				buscar = true;
+			}
+		}
+		if (buscar == false) {
+			System.out.println("No existe, creando uno nuevo...");
+			Cliente cliente = new Cliente();
+			cliente.setNombre(funciones.dimeString("Introduce el nombre del cliente:", sc));
+			cliente.setDireccion(funciones.dimeString("Introduce la dirección:", sc));
+			cliente.setCodigo(funciones.dimeEntero("Introduce el código:", sc));
+			ClienteDao.inserta(cliente);
+		}
+	}
+
+	public static void listarProductos(Scanner sc) {
+		List<Categoria> categorias = CategoriaDao.lista();
+		System.out.println("Lista de categorías");
+		for (Categoria c : categorias) {
+			System.out.println(c);
+		}
+		int catBuscar = funciones.dimeEntero("Elige una (Seleccione ID):", sc);
+		for (Categoria c : categorias) {
+			if (c.getIdCategoria() == catBuscar) {
+				for (Producto p : ProductoDao.lista(catBuscar)) {
+					System.out.println(p);
+				}
+			}
+		}
+	}
+
+	public static void buscarProd(Scanner sc) {
+
 	}
 }

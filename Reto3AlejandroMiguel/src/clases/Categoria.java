@@ -4,11 +4,15 @@ public class Categoria {
 
 	private int idCategoria;
 	private String nombre;
-	
+
 	public Categoria(int idCategoria, String nombre) {
 		super();
 		this.idCategoria = idCategoria;
 		this.nombre = nombre;
+	}
+
+	public Categoria(int idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 	public Categoria() {
@@ -35,5 +39,5 @@ public class Categoria {
 	public String toString() {
 		return "Categoria [idCategoria=" + idCategoria + ", nombre=" + nombre + "]";
 	}
-	
+
 }
