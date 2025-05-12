@@ -6,7 +6,7 @@ import clases.*;
 
 public class ProductoDao {
 
-	public static List<Producto> lista(int idCat) {
+	public static List<Producto> listaCategoria (int idCat) {
 		List<Producto> productos = new ArrayList<Producto>();
 		try {
 			Connection con = Conexion.abreConexion();
@@ -23,6 +23,26 @@ public class ProductoDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+	
+	public static List<Producto> lista () {
+		List <Producto> productos = new ArrayList <Producto>();
+		try {
+			Connection con = Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement("SELECT idproducto,nombre,precio,descripcion,color,talla,stock FROM proyecto3ev.productos;");
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				productos.add(new Producto (rs.getInt("idproducto"),rs.getString("nombre"),rs.getDouble("precio"),rs.getString("Descripcion"),rs.getString("color"),rs.getString("talla"),rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
 			Conexion.cierraConexion();
 		}
 		return productos;

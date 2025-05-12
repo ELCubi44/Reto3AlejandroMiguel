@@ -23,6 +23,18 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
+	
+	public Producto(int idProducto, String nombre, double precio, String descripcion, String color, String talla,
+			int stock) {
+		super();
+		this.idProducto = idProducto;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.descripcion = descripcion;
+		this.color = color;
+		this.talla = talla;
+		this.stock = stock;
+	}
 
 	public Producto() {
 		super();
