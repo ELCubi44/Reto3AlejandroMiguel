@@ -6,13 +6,13 @@ import clases.*;
 public class ProductoDao {
 
 	public static List<Producto> lista () {
-		List <Producto> profesores = new ArrayList <Producto>();
+		List <Producto> productos = new ArrayList <Producto>();
 		try {
 			Connection con = Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement("");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				profesores.add(new Producto );
+				productos.add(new Producto );
 			}
 			rs.close();
 		} catch (Exception e) {
