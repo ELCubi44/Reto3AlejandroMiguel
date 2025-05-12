@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import clases.Categoria;
+
 public class funciones {
 
 	public static boolean esInt(String s) {
@@ -169,7 +171,8 @@ public class funciones {
 		return new Date(d.getTime());
 	}
 
-	public static void gestionCat() {
-		
+	public static void gestionCat(Scanner sc) {
+		Categoria cat = new Categoria(funciones.dimeEntero("Introduce el ID de la categoría:", sc),
+				funciones.dimeString("Introduce el nombre de la categoría:", sc));
 	}
 }
