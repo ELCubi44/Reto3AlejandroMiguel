@@ -24,16 +24,15 @@ public class CategoriaDao {
 		return categorias;
 	}
 	
-	public static void inserta (String categoria) {
+	public static void inserta (Categoria categoria) {
 		try {
 			Connection con = Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement("INSERT INTO categoria ('nombre') VALUES (?);", Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1,categoria);
+			pst.setString(1,categoria.getNombre());
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
 				if (rs.next()) {
-					Categoria categoria1 = new Categoria (rs.getInt(1),categoria);
-					categorias.add(categoria1);
+					categoria.setIdCategoria  (rs.getInt(1));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
