@@ -1,25 +1,18 @@
 package clasesDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import clases.Categoria;
-import clases.Conexion;
-
+import java.sql.*;
+import java.util.*;
+import clases.*;
 public class PedidoDao {
 
 	public static List<Pedido> lista () {
 		List <Pedido> pedidos = new ArrayList <Pedido>();
 		try {
 			Connection con = Conexion.abreConexion();
-			PreparedStatement pst = con.prepareStatement("");
+			PreparedStatement pst = con.prepareStatement("SELECT idpedido,idcliente,precioTotal,direccionEnvio,fecha FROM proyecto3ev.pedidos;");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				pedidos.add(new Pedido ());
+				pedidos.add(new Pedido (rs.getInt("idpedido"),rs.getInt("idcliente"),rs.getDouble("precioTotal"),rs.getString("direccionEnvio"),rs.getDate("fecha")));
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -34,7 +27,7 @@ public class PedidoDao {
 	public static void inserta (Pedido pedido) {
 		try {
 			Connection con = Conexion.abreConexion();
-			PreparedStatement pst = con.prepareStatement("", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pst = con.prepareStatement("INSERT INTO pedido ('idcliente','precioTotal','direccionEnvio','fecha') VALUES (?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
 			pst.setString();
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
