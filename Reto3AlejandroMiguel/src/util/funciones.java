@@ -245,6 +245,6 @@ public class funciones {
 	}
 
 	public static void buscarProd(Scanner sc) {
-
+		
 	}
 }
