@@ -8,11 +8,11 @@ public class Producto {
 	private double precio;
 	private String descripcion;
 	private String color;
-	private char tall;
+	private String talla;
 	private int stock;
 	
 	public Producto(int idProducto, Categoria categoria, String nombre, double precio, String descripcion, String color,
-			char tall, int stock) {
+			String talla, int stock) {
 		super();
 		this.idProducto = idProducto;
 		this.categoria = categoria;
@@ -20,7 +20,7 @@ public class Producto {
 		this.precio = precio;
 		this.descripcion = descripcion;
 		this.color = color;
-		this.tall = tall;
+		this.talla = talla;
 		this.stock = stock;
 	}
 
@@ -76,12 +76,12 @@ public class Producto {
 		this.color = color;
 	}
 
-	public char getTall() {
-		return tall;
+	public String getTalla() {
+		return talla;
 	}
 
-	public void setTall(char tall) {
-		this.tall = tall;
+	public void setTall(String talla) {
+		this.talla = talla;
 	}
 
 	public int getStock() {
@@ -95,7 +95,7 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto [idProducto=" + idProducto + ", categoria=" + categoria + ", nombre=" + nombre + ", precio="
-				+ precio + ", descripcion=" + descripcion + ", color=" + color + ", tall=" + tall + ", stock=" + stock
+				+ precio + ", descripcion=" + descripcion + ", color=" + color + ", tall=" + talla + ", stock=" + stock
 				+ "]";
 	}
 	
