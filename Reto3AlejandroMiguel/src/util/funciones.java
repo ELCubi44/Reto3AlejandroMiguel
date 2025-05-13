@@ -1,20 +1,10 @@
 package util;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-
-import clases.Categoria;
-import clases.Cliente;
-import clases.Producto;
-import clasesDao.CategoriaDao;
-import clasesDao.ClienteDao;
-import clasesDao.ProductoDao;
+import java.time.*;
+import java.util.*;
+import clases.*;
+import clasesDao.*;
 
 public class funciones {
 
@@ -176,9 +166,14 @@ public class funciones {
 		return new Date(d.getTime());
 	}
 
+	public static java.sql.Date convierteFecha(Date fecha)
+	{
+		return new java.sql.Date(fecha.getTime());
+	}
+	
 	public static void gestionCat(Scanner sc) {
 		Categoria cat = new Categoria();
-		cat.setNombre(funciones.dimeString("Introduce el nombre de la categoría:", sc));
+		cat.setNombre(funciones.dimeString("Introduce el nombre de la categorï¿½a:", sc));
 		CategoriaDao.inserta(cat);
 	}
 
@@ -186,11 +181,11 @@ public class funciones {
 		Producto pro = new Producto();
 		pro.setNombre(funciones.dimeString("Introduce nombre del producto:", sc));
 		pro.setColor(funciones.dimeString("Introduce color del producto:", sc));
-		pro.setDescripcion(funciones.dimeString("Introduce descripción del producto", sc));
+		pro.setDescripcion(funciones.dimeString("Introduce descripciï¿½n del producto", sc));
 		pro.setPrecio(funciones.dimeDouble("Introduce precio del producto", sc));
 		pro.setStock(funciones.dimeEntero("Introduce cantidad del producto", sc));
 		pro.setTall(funciones.dimeString("Introduce talla del producto:", sc));
-		System.out.println("Lista de categorías:");
+		System.out.println("Lista de categorï¿½as:");
 		for (Categoria c : CategoriaDao.lista()) {
 			System.out.println(c.getIdCategoria() + c.getNombre());
 		}
@@ -205,12 +200,12 @@ public class funciones {
 
 	public static void altaClientes(Scanner sc) {
 		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
-				funciones.dimeString("Introduce la dirección:", sc), funciones.dimeEntero("Introduce el código:", sc));
+				funciones.dimeString("Introduce la direcciï¿½n:", sc), funciones.dimeEntero("Introduce el cï¿½digo:", sc));
 		ClienteDao.inserta(cliente);
 	}
 
 	public static void busCod(Scanner sc) {
-		int codBuscar = funciones.dimeEntero("Introduce el código de cliente a buscar:", sc);
+		int codBuscar = funciones.dimeEntero("Introduce el cï¿½digo de cliente a buscar:", sc);
 		boolean buscar = false;
 		for (Cliente c : ClienteDao.lista()) {
 			if (c.getCodigo() == codBuscar) {
@@ -222,15 +217,15 @@ public class funciones {
 			System.out.println("No existe, creando uno nuevo...");
 			Cliente cliente = new Cliente();
 			cliente.setNombre(funciones.dimeString("Introduce el nombre del cliente:", sc));
-			cliente.setDireccion(funciones.dimeString("Introduce la dirección:", sc));
-			cliente.setCodigo(funciones.dimeEntero("Introduce el código:", sc));
+			cliente.setDireccion(funciones.dimeString("Introduce la direcciï¿½n:", sc));
+			cliente.setCodigo(funciones.dimeEntero("Introduce el cï¿½digo:", sc));
 			ClienteDao.inserta(cliente);
 		}
 	}
 
 	public static void listarProductos(Scanner sc) {
 		List<Categoria> categorias = CategoriaDao.lista();
-		System.out.println("Lista de categorías");
+		System.out.println("Lista de categorï¿½as");
 		for (Categoria c : categorias) {
 			System.out.println(c);
 		}
@@ -259,8 +254,96 @@ public class funciones {
 	}
 
 	public static void crearPedido(Scanner sc) {
-
-	}
+		List <Cliente> clientes = ClienteDao.lista();
+		for (Cliente cliente : clientes) {
+			System.out.println(cliente);
+		}
+		
+		int clienteBuscar;
+		boolean aux = false;
+		do {
+		clienteBuscar = funciones.dimeEntero("Elige una (Seleccione ID):", sc);
+			for (Cliente cliente : clientes) {
+				if (clienteBuscar == cliente.getIdCliente());
+				aux = true;
+			}
+		} while (aux == false);
+		
+		for (Cliente cliente : clientes) {
+			if (clienteBuscar == cliente.getIdCliente()); {
+				System.out.println ("Nombre: "+cliente.getIdCliente()+", ID: "+clienteBuscar);
+			}
+		}
+		
+			
+		List<Producto> pedido = new ArrayList <Producto>();
+		do {
+			List<Producto> productos = ProductoDao.lista();
+			for (Producto producto : productos) {
+				System.out.println(producto);
+			}
+			int producto = funciones.dimeEntero("Elige un producto (Seleccione ID) o 0 para acabar", sc);
+			if (producto == 0)
+				break;
+			for (Producto producto2 : productos) {
+				if (producto2.getIdProducto() == producto) {
+					int unidades = funciones.dimeEntero("Cuantas unidades quieres", sc);
+						if (unidades > producto2.getStock()) {
+							unidades = producto2.getStock();
+							Producto productoPedido = new Producto (producto,unidades);
+							pedido.add(productoPedido);
+							ProductoDao.eliminarStock(producto, unidades);
+						}
+						else if (unidades <= 0){
+							System.out.println("Las unidades deben ser mas de 0");
+						}
+						else {
+							Producto productoPedido = new Producto (producto,unidades);
+							pedido.add(productoPedido);
+							ProductoDao.eliminarStock(producto, unidades);
+						}
+				}
+				else 
+					System.out.println("Este Id no existe");
+			}
+		} while (true);
+		
+		String direccion = "";
+		
+		Cliente cliente = null;
+		for (Cliente cliente2 : clientes) {
+			if (cliente2.getIdCliente()==clienteBuscar) {
+				cliente = cliente2;
+				direccion = cliente2.getDireccion();
+				System.out.println(cliente2.getDireccion());
+				System.out.println("Esta es tu direccion de envio, Â¿deseas cambiarla? (Si / No):");
+			}
+		}
+		
+		do {
+			String opcion = sc.nextLine().toLowerCase();
+			if (opcion.equals("si")) {
+				System.out.println("Escribe la nueva direccion de envio:");
+				direccion = sc.nextLine();
+				System.out.println("Direccion de envio actualizada");
+				break;
+			}
+			else 
+				System.out.println("Seleccionada direccion de envio predeterminada");
+				break;
+		} while (true);
+		
+		double precio = 0;
+		for (Producto producto : pedido) {
+			precio += (producto.getPrecio()*producto.getStock());
+		}
+		LocalDate now = LocalDate.now();
+		Date hoy = ldDate (now);
+		
+		Pedido pedido1 = new Pedido (cliente,precio,direccion,(java.sql.Date) hoy);
+		
+	} 
+		
 
 	public static void verPedidos(Scanner sc) {
 

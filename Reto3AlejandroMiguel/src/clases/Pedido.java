@@ -10,9 +10,8 @@ public class Pedido {
 	private String direccionEnvio;
 	private Date fecha;
 	
-	public Pedido(int idPedido, Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
+	public Pedido(Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
 		super();
-		this.idPedido = idPedido;
 		this.cliente = cliente;
 		this.precioTotal = precioTotal;
 		this.direccionEnvio = direccionEnvio;

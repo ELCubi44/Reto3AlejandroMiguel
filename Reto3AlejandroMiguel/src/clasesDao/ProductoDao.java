@@ -73,5 +73,19 @@ public class ProductoDao {
 		}
 	}
 	
+	public static void eliminarStock (int producto, int unidades) {
+		try {
+			Connection con = Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement(
+					"UPDATE proyecto3ev.productos SET stock = (stock - ?) WHERE (idproducto = ?)");
+			pst.setInt(1, producto);
+			pst.setInt(2, unidades);
+			pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+	}
 
 }
