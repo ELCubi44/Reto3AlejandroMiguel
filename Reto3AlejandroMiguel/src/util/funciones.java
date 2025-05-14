@@ -1,5 +1,25 @@
 package util;
 
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+
+import clases.Categoria;
+import clases.Cliente;
+import clases.Pedido;
+import clases.PedidoProducto;
+import clases.Producto;
+import clasesDao.CategoriaDao;
+import clasesDao.ClienteDao;
+import clasesDao.PedidoDao;
+import clasesDao.ProductoDao;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -369,6 +389,7 @@ public class funciones {
 		}
 	}
 
+<<<<<<< HEAD
 	
 	public static void bajoStock(Scanner sc) {
 		for (Producto p : ProductoDao.listaStock()) {
@@ -376,6 +397,14 @@ public class funciones {
 					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
 		int reponer = funciones.dimeEntero("�Cu�ntas unidades quieres reponer?", sc);
+=======
+	public static void bajoStock(Scanner sc) {
+		for (Producto p : ProductoDao.listaStock()) {
+			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
+					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
+		}
+		int reponer = funciones.dimeEntero("�Cu�ntas unidades quieres reponer?", sc);
+>>>>>>> branch 'main' of https://github.com/ELCubi44/Reto3AlejandroMiguel.git
 		if (reponer <= 0) {
 			System.out.println("Nada que reponer");
 		} else

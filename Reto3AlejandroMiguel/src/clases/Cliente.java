@@ -8,6 +8,7 @@ public class Cliente {
 	private String direccion;
 	private int codigo;
 
+
 	/**
 	 * Constructor con todos las variables para crear Clientes con todos los parametros
 	 * @param idCliente, id unico
