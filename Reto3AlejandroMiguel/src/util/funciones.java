@@ -357,6 +357,7 @@ public class funciones {
 		System.out.println("Pedido guardado, el precio total es: " + precio);
 	}
 
+	
 	public static void verPedidos() {
 		int mes = LocalDate.now().getMonthValue();
 		for (PedidoProducto p : PedidoProductoDao.listaFecha(mes)) {
