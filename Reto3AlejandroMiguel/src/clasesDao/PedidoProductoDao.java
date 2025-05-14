@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clases.Conexion;
+import clases.Pedido;
 import clases.PedidoProducto;
+import clases.Producto;
 
 public class PedidoProductoDao {
 	/**
@@ -55,7 +57,8 @@ public class PedidoProductoDao {
 			ps.setInt(1, mes);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				productos.add(new PedidoProducto());
+				productos.add(new PedidoProducto(rs.getInt("a.idpedidoproducto"), new Pedido(), new Producto(),
+						rs.getInt("a.unidades"), rs.getDouble("a.precio")));
 			}
 			rs.close();
 
