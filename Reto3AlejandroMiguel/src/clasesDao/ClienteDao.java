@@ -1,11 +1,20 @@
 package clasesDao;
 
+/**
+ * @author Alejandro y Miguel
+ * @since 14/05/2025
+ * @version 1
+ */
+
 import java.sql.*;
 import java.util.*;
 import clases.*;
 
 public class ClienteDao {
-
+	/**
+	 * Metodo que lista todos los clientes de la base de datos
+	 * @return una lista con los clientes de la base de datos
+	 */
 	public static List<Cliente> lista () {
 		List <Cliente> clientes = new ArrayList <Cliente>();
 		try {
@@ -24,7 +33,10 @@ public class ClienteDao {
 		}
 	return clientes;
 }
-	
+	/**
+	 * Metodo que sirve oara insertar un cliente nuevo en la base de datos
+	 * @param cliente nos pasan el cliente que queremos añadir ya creado
+	 */
 	public static void inserta (Cliente cliente) {
 		try {
 			Connection con = Conexion.abreConexion();

@@ -1,5 +1,11 @@
 package clases;
 
+/**
+ * @author Alejandro y Miguel
+ * @since 14/05/2025
+ * @version 1
+ */
+
 public class Producto {
 
 	private int idProducto;
@@ -10,7 +16,17 @@ public class Producto {
 	private String color;
 	private String talla;
 	private int stock;
-	
+	/**
+	 * Constructor con todos los parametros para crear un producto
+	 * @param idProducto
+	 * @param categoria
+	 * @param nombre
+	 * @param precio
+	 * @param descripcion
+	 * @param color
+	 * @param talla
+	 * @param stock
+	 */
 	public Producto(int idProducto, Categoria categoria, String nombre, double precio, String descripcion, String color,
 			String talla, int stock) {
 		super();
@@ -23,7 +39,16 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
-	
+	/**
+	 * Constructor que usamos para lista producto en productoDao sin categoria
+	 * @param idProducto
+	 * @param nombre
+	 * @param precio
+	 * @param descripcion
+	 * @param color
+	 * @param talla
+	 * @param stock
+	 */
 	public Producto(int idProducto, String nombre, double precio, String descripcion, String color, String talla,
 			int stock) {
 		super();
@@ -35,13 +60,19 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
-
+	/**
+	 * Constructor que usamos para bajar el stock de un producto en ProductoDao
+	 * @param idProducto
+	 * @param stock
+	 */
 	public Producto(int idProducto, int stock) {
 		super();
 		this.idProducto = idProducto;
 		this.stock = stock;
 	}
-
+	/**
+	 * Constructor vacio
+	 */
 	public Producto() {
 		super();
 	}

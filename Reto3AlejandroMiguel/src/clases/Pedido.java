@@ -1,23 +1,37 @@
 package clases;
 
+/**
+ * @author Alejandro y Miguel
+ * @since 14/05/2025
+ * @version 1
+ */
+
 import java.sql.*;
 
 public class Pedido {
-
+	
 	private int idPedido;
 	private Cliente cliente;
 	private double precioTotal;
 	private String direccionEnvio;
-	private Date fecha;
-	
-	public Pedido(Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
+	private java.util.Date fecha;
+	/**
+	 * Constructor con todos los parametros para crear pedidos
+	 * @param cliente
+	 * @param precioTotal
+	 * @param direccionEnvio
+	 * @param fecha
+	 */
+	public Pedido(int idpedido, Cliente cliente, double precioTotal, String direccionEnvio, java.util.Date fecha) {
 		super();
 		this.cliente = cliente;
 		this.precioTotal = precioTotal;
 		this.direccionEnvio = direccionEnvio;
 		this.fecha = fecha;
 	}
-
+	/**
+	 * Constructor vacio
+	 */
 	public Pedido() {
 		super();
 	}
@@ -54,11 +68,11 @@ public class Pedido {
 		this.direccionEnvio = direccionEnvio;
 	}
 
-	public Date getFecha() {
+	public java.util.Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(java.util.Date fecha) {
 		this.fecha = fecha;
 	}
 

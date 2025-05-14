@@ -1,5 +1,11 @@
 package clases;
 
+/**
+ * @author Alejandro y Miguel
+ * @since 14/05/2025
+ * @version 1
+ */
+
 public class PedidoProducto {
 
 	private int idPedidoProducto;
@@ -7,7 +13,14 @@ public class PedidoProducto {
 	private Producto producto;
 	private int unidades;
 	private double precio;
-	
+	/**
+	 * Constructor con todos los parametros para crear PedidoProducto
+	 * @param idPedidoProducto
+	 * @param pedido
+	 * @param producto
+	 * @param unidades
+	 * @param precio
+	 */
 	public PedidoProducto(int idPedidoProducto, Pedido pedido, Producto producto, int unidades, double precio) {
 		super();
 		this.idPedidoProducto = idPedidoProducto;
@@ -16,7 +29,9 @@ public class PedidoProducto {
 		this.unidades = unidades;
 		this.precio = precio;
 	}
-
+	/**
+	 * Constructor vacio
+	 */
 	public PedidoProducto() {
 		super();
 	}

@@ -1,12 +1,22 @@
 package clasesDao;
 
+/**
+ * @author Alejandro y Miguel
+ * @since 14/05/2025
+ * @version 1
+ */
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import clases.*;
+import util.funciones;
 public class PedidoDao {
-	
+	/**
+	 * Metodo que lista todos los pedidos que de la base de datos
+	 * @return una lista con todos los pedidos almacenados
+	 */
 	public static List <Pedido> lista () {
 		List <Pedido> pedidos = new ArrayList <Pedido> ();
 		try {
@@ -25,7 +35,10 @@ public class PedidoDao {
 		}
 		return pedidos;
 	}
-	
+	/**
+	 * Metodo que inserta un pedido que nos pasan a la base de datos
+	 * @param pedido un pedido ya creado
+	 */
 	public static void inserta (Pedido pedido) {
 		try {
 			Connection con = Conexion.abreConexion();
@@ -33,7 +46,7 @@ public class PedidoDao {
 			pst.setInt(1,pedido.getCliente().getIdCliente());
 			pst.setDouble(2, pedido.getPrecioTotal());
 			pst.setString(3, pedido.getDireccionEnvio());
-			pst.setDate(4, pedido.getFecha());
+			pst.setDate(4, funciones.convierteFecha(pedido.getFecha()));
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
 				if (rs.next()) {

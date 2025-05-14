@@ -1,10 +1,20 @@
 package clasesDao;
+
+/**
+ * @author Alejandro y Miguel
+ * @since 14/05/2025
+ * @version 1
+ */
+
 import java.sql.*;
 import java.util.*;
 import clases.*;
 
 public class CategoriaDao {
-	
+	/**
+	 * Metodo para listar las categorias
+	 * @return una lista con las categorias de la base de datos insertada
+	 */
 	public static List<Categoria> lista () {
 		List <Categoria> categorias = new ArrayList <Categoria>();
 		try {
@@ -23,7 +33,10 @@ public class CategoriaDao {
 		}
 		return categorias;
 	}
-	
+	/**
+	 * Sirve para insertar una categoria nueva en la base de datos
+	 * @param categoria nos pasan la categoria creada que queremos añadir
+	 */
 	public static void inserta (Categoria categoria) {
 		try {
 			Connection con = Conexion.abreConexion();

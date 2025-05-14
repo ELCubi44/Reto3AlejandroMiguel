@@ -1,10 +1,19 @@
  package clasesDao;
 
+ /**
+  * @author Alejandro y Miguel
+  * @since 14/05/2025
+  * @version 1
+  */
+ 
 import java.sql.*;
 import clases.*;
 
 public class PedidoProductoDao {
-
+	/**
+	 * Inserta un pedido que ya nos lo pasa creado
+	 * @param pedido nos lo pasan ya creado
+	 */
 	public static void inserta (PedidoProducto pedido) {
 		try {
 			Connection con = Conexion.abreConexion();
