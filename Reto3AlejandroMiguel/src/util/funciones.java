@@ -354,6 +354,9 @@ public class funciones {
 
 		Pedido pedido1 = new Pedido(cliente, precio, direccion, convierteFecha(hoy));
 		PedidoDao.inserta(pedido1);
+		for (int i = 0; i < pedido.size(); i++) {
+			PedidoProducto pedidoProducto = new PedidoProducto (pedido1,pedido.get(i).getIdProducto(),pedido.get(i).getStock())
+		}
 		System.out.println("Pedido guardado, el precio total es: " + precio);
 	}
 
@@ -372,7 +375,7 @@ public class funciones {
 			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
 					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
-		int reponer = funciones.dimeEntero("¿Cuántas unidades quieres reponer?", sc);
+		int reponer = funciones.dimeEntero("ï¿½Cuï¿½ntas unidades quieres reponer?", sc);
 		if (reponer <= 0) {
 			System.out.println("Nada que reponer");
 		} else
