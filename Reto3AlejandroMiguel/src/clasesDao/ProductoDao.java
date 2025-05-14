@@ -6,7 +6,6 @@ import clases.*;
 
 public class ProductoDao {
 
-
 	public static List<Producto> listaCategoria(int idCat) {
 		List<Producto> productos = new ArrayList<Producto>();
 		try {
