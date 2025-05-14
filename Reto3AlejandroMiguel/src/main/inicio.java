@@ -14,6 +14,7 @@ public class inicio {
 			switch (opcion) {
 			case 1:
 				submenu1(sc);
+				break;
 			case 2:
 				submenu2(sc);
 				break;
@@ -110,7 +111,7 @@ public class inicio {
 				funciones.crearPedido(sc);
 				break;
 			case 2:
-				funciones.verPedidos(sc);
+				funciones.verPedidos();
 				break;
 			case 3:
 				System.out.println("Volviendo...");
@@ -129,13 +130,13 @@ public class inicio {
 					sc);
 			switch (opcion) {
 			case 1:
-
+				funciones.bajoStock(sc);
 				break;
 			case 2:
-
+				funciones.pedidosCliente(sc);
 				break;
 			case 3:
-
+				funciones.productoMvendido();
 				break;
 			case 4:
 				System.out.println("Volviendo...");
@@ -147,5 +148,4 @@ public class inicio {
 		} while (opcion != 4);
 	}
 
-	
 }

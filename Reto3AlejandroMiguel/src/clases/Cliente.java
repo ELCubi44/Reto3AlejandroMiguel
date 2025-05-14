@@ -1,17 +1,13 @@
 package clases;
 
-/**
- * @author Alejandro y Miguel
- * @since 14/05/2025
- * @version 1
- */
 
 public class Cliente {
-
+ 
 	private int idCliente;
 	private String nombre;
 	private String direccion;
 	private int codigo;
+
 	/**
 	 * Constructor con todos las variables para crear Clientes con todos los parametros
 	 * @param idCliente, id unico
@@ -19,6 +15,10 @@ public class Cliente {
 	 * @param direccion
 	 * @param codigo
 	 */
+
+
+	
+
 	public Cliente(int idCliente, String nombre, String direccion, int codigo) {
 		super();
 		this.idCliente = idCliente;
@@ -78,5 +78,5 @@ public class Cliente {
 		return "cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", direccion=" + direccion + ", codigo="
 				+ codigo + "]";
 	}
-	
+
 }
