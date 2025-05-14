@@ -7,12 +7,18 @@ public class Cliente {
 	private String direccion;
 	private int codigo;
 
+	
 	public Cliente(int idCliente, String nombre, String direccion, int codigo) {
 		super();
 		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.codigo = codigo;
+	}
+	
+	public Cliente(int idCliente) {
+		super();
+		this.idCliente = idCliente;
 	}
 
 	public Cliente() {

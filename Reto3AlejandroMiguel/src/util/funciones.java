@@ -1,6 +1,6 @@
 package util;
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;<<<<<<<HEAD
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +17,12 @@ import clases.Producto;
 import clasesDao.CategoriaDao;
 import clasesDao.ClienteDao;
 import clasesDao.PedidoDao;
-import clasesDao.ProductoDao;
+import clasesDao.ProductoDao;=======
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import clases.*;
+import clasesDao.*;>>>>>>>branch'main'of https://github.com/ELCubi44/Reto3AlejandroMiguel.git
 
 public class funciones {
 
@@ -349,7 +354,6 @@ public class funciones {
 			precio += (producto.getPrecio() * producto.getStock());
 		}
 		LocalDate now = LocalDate.now();
-
 		Date hoy = ldDate(now);
 
 		Pedido pedido1 = new Pedido(cliente, precio, direccion, (java.sql.Date) hoy);
@@ -378,13 +382,20 @@ public class funciones {
 	}
 
 	public static void pedidosCliente(Scanner sc) {
-
+		int id = funciones.dimeEntero("Introduce tu ID de cliente:", sc);
+		Cliente cliente = null;
+		for (Cliente c : listaClientes) {
+			if (c.getIdCliente() == id) {
+				cliente = c;
+			}
+		}
+		
 	}
 
 	public static void productoMvendido() {
-		for(PedidoProducto p:lista) {
+		for (PedidoProducto p : lista) {
 			System.out.println(p);
-			//mostrar categoria,nombre,stock
+			// mostrar categoria,nombre,stock
 		}
 	}
 }
