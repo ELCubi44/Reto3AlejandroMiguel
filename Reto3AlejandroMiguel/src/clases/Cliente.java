@@ -6,7 +6,7 @@ public class Cliente {
 	private String nombre;
 	private String direccion;
 	private int codigo;
-	
+
 	public Cliente(int idCliente, String nombre, String direccion, int codigo) {
 		super();
 		this.idCliente = idCliente;
@@ -56,5 +56,5 @@ public class Cliente {
 		return "cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", direccion=" + direccion + ", codigo="
 				+ codigo + "]";
 	}
-	
+
 }

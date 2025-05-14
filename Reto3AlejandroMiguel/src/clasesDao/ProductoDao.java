@@ -6,7 +6,7 @@ import clases.*;
 
 public class ProductoDao {
 
-	public static List<Producto> listaCategoria (int idCat) {
+	public static List<Producto> listaCategoria(int idCat) {
 		List<Producto> productos = new ArrayList<Producto>();
 		try {
 			Connection con = Conexion.abreConexion();
@@ -27,22 +27,23 @@ public class ProductoDao {
 		}
 		return productos;
 	}
-	
-	public static List<Producto> lista () {
-		List <Producto> productos = new ArrayList <Producto>();
+
+	public static List<Producto> lista() {
+		List<Producto> productos = new ArrayList<Producto>();
 		try {
 			Connection con = Conexion.abreConexion();
-			PreparedStatement pst = con.prepareStatement("SELECT idproducto,nombre,precio,descripcion,color,talla,stock FROM proyecto3ev.productos;");
+			PreparedStatement pst = con.prepareStatement(
+					"SELECT idproducto,nombre,precio,descripcion,color,talla,stock FROM proyecto3ev.productos;");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				
-				productos.add(new Producto (rs.getInt("idproducto"),rs.getString("nombre"),rs.getDouble("precio"),rs.getString("Descripcion"),rs.getString("color"),rs.getString("talla"),rs.getInt("stock")));
+
+				productos.add(new Producto(rs.getInt("idproducto"), rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
 			}
 			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			Conexion.cierraConexion();
 		}
 		return productos;
@@ -72,12 +73,12 @@ public class ProductoDao {
 			Conexion.cierraConexion();
 		}
 	}
-	
-	public static void eliminarStock (int producto, int unidades) {
+
+	public static void eliminarStock(int producto, int unidades) {
 		try {
 			Connection con = Conexion.abreConexion();
-			PreparedStatement pst = con.prepareStatement(
-					"UPDATE proyecto3ev.productos SET stock = (stock - ?) WHERE (idproducto = ?)");
+			PreparedStatement pst = con
+					.prepareStatement("UPDATE proyecto3ev.productos SET stock = (stock - ?) WHERE (idproducto = ?)");
 			pst.setInt(1, producto);
 			pst.setInt(2, unidades);
 			pst.executeUpdate();

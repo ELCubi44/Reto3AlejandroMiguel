@@ -111,7 +111,7 @@ public class inicio {
 				funciones.crearPedido(sc);
 				break;
 			case 2:
-				funciones.verPedidos(sc);
+				funciones.verPedidos();
 				break;
 			case 3:
 				System.out.println("Volviendo...");
@@ -130,10 +130,10 @@ public class inicio {
 					sc);
 			switch (opcion) {
 			case 1:
-				funciones.bajoStock();
+				funciones.bajoStock(sc);
 				break;
 			case 2:
-				funciones.pedidosCliente();
+				funciones.pedidosCliente(sc);
 				break;
 			case 3:
 				funciones.productoMvendido();

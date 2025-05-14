@@ -12,9 +12,11 @@ import java.util.Scanner;
 import clases.Categoria;
 import clases.Cliente;
 import clases.Pedido;
+import clases.PedidoProducto;
 import clases.Producto;
 import clasesDao.CategoriaDao;
 import clasesDao.ClienteDao;
+import clasesDao.PedidoDao;
 import clasesDao.ProductoDao;
 
 public class funciones {
@@ -347,25 +349,42 @@ public class funciones {
 			precio += (producto.getPrecio() * producto.getStock());
 		}
 		LocalDate now = LocalDate.now();
+
 		Date hoy = ldDate(now);
 
 		Pedido pedido1 = new Pedido(cliente, precio, direccion, (java.sql.Date) hoy);
-
+		PedidoDao.inserta(pedido1);
+		System.out.println("Pedido guardado, el precio total es: " + precio);
 	}
 
-	public static void verPedidos(Scanner sc) {
-		
+	public static void verPedidos() {
+		for (PedidoProducto p : lista) {
+			System.out.println(p);
+			// mostrar fecha,nombrecliente,preciototal,direccionenvio, y de cada prodcuto:
+			// categoria,nombre,unidades compradas
+		}
 	}
 
-	public static void bajoStock() {
-		
+	public static void bajoStock(Scanner sc) {
+		for (Producto p : lista) {
+			System.out.println(p);
+			// mostrar todo menos idproducto
+		}
+		int reponer = funciones.dimeEntero("¿Cuántas unidades quieres reponer?", sc);
+		if (reponer <= 0) {
+			System.out.println("Nada que reponer");
+		}else
+			actulizarBD;
 	}
 
-	public static void pedidosCliente() {
-		
+	public static void pedidosCliente(Scanner sc) {
+
 	}
 
 	public static void productoMvendido() {
-		
+		for(PedidoProducto p:lista) {
+			System.out.println(p);
+			//mostrar categoria,nombre,stock
+		}
 	}
 }
