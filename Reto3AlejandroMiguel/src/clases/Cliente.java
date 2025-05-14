@@ -14,6 +14,11 @@ public class Cliente {
 		this.direccion = direccion;
 		this.codigo = codigo;
 	}
+	
+	public Cliente(int idCliente) {
+		super();
+		this.idCliente = idCliente;
+	}
 
 	public Cliente() {
 		super();
