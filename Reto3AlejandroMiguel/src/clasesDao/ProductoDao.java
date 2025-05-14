@@ -49,6 +49,24 @@ public class ProductoDao {
 		return productos;
 	}
 
+	public static List<Producto> listaStock() {
+		List<Producto> productos = new ArrayList<>();
+		try {
+			ResultSet rs = Conexion.abreConexion().prepareStatement("select * from productos where stock<5")
+					.executeQuery();
+			while (rs.next()) {
+				productos.add(new Producto(rs.getInt("idproducto"), rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+
 	public static void inserta(Producto producto) {
 		try {
 			Connection con = Conexion.abreConexion();
@@ -88,5 +106,19 @@ public class ProductoDao {
 			Conexion.cierraConexion();
 		}
 	}
-	
+
+	public static void aumentarStock(int unidades) {
+		try {
+			Connection con = Conexion.abreConexion();
+			PreparedStatement pst = con
+					.prepareStatement("UPDATE proyecto3ev.productos SET stock = (stock + ?) WHERE stock<5");
+			pst.setInt(1, unidades);
+			pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+	}
+
 }

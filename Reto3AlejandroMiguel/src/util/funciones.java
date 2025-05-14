@@ -370,15 +370,16 @@ public class funciones {
 	}
 
 	public static void bajoStock(Scanner sc) {
-		for (Producto p : lista) {
-			System.out.println(p);
-			// mostrar todo menos idproducto
+		for (Producto p : ProductoDao.listaStock()) {
+			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
+					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
 		int reponer = funciones.dimeEntero("¿Cuántas unidades quieres reponer?", sc);
 		if (reponer <= 0) {
 			System.out.println("Nada que reponer");
-		}else
-			actulizarBD;
+		} else
+			ProductoDao.aumentarStock(reponer);
+		System.out.println("Producto repuesto");
 	}
 
 	public static void pedidosCliente(Scanner sc) {
@@ -389,7 +390,7 @@ public class funciones {
 				cliente = c;
 			}
 		}
-		
+
 	}
 
 	public static void productoMvendido() {
