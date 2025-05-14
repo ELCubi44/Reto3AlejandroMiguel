@@ -1,6 +1,5 @@
 package util;
 
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,31 +17,8 @@ import clases.Producto;
 import clasesDao.CategoriaDao;
 import clasesDao.ClienteDao;
 import clasesDao.PedidoDao;
+import clasesDao.PedidoProductoDao;
 import clasesDao.ProductoDao;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-
-import clases.Categoria;
-import clases.Cliente;
-import clases.Pedido;
-import clases.PedidoProducto;
-import clases.Producto;
-import clasesDao.CategoriaDao;
-import clasesDao.ClienteDao;
-import clasesDao.PedidoDao;
-import clasesDao.ProductoDao;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import clases.*;
-import clasesDao.*;
 
 public class funciones {
 
@@ -376,35 +352,26 @@ public class funciones {
 		LocalDate now = LocalDate.now();
 		Date hoy = ldDate(now);
 
-		Pedido pedido1 = new Pedido(cliente, precio, direccion, (java.sql.Date) hoy);
+		Pedido pedido1 = new Pedido(cliente, precio, direccion, convierteFecha(hoy));
 		PedidoDao.inserta(pedido1);
 		System.out.println("Pedido guardado, el precio total es: " + precio);
 	}
 
 	public static void verPedidos() {
-		for (PedidoProducto p : lista) {
+		int mes = LocalDate.now().getMonthValue();
+		for (PedidoProducto p : PedidoProductoDao.listaFecha(mes)) {
 			System.out.println(p);
 			// mostrar fecha,nombrecliente,preciototal,direccionenvio, y de cada prodcuto:
 			// categoria,nombre,unidades compradas
 		}
 	}
 
-<<<<<<< HEAD
-	
 	public static void bajoStock(Scanner sc) {
 		for (Producto p : ProductoDao.listaStock()) {
 			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
 					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
-		int reponer = funciones.dimeEntero("ï¿½Cuï¿½ntas unidades quieres reponer?", sc);
-=======
-	public static void bajoStock(Scanner sc) {
-		for (Producto p : ProductoDao.listaStock()) {
-			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
-					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
-		}
-		int reponer = funciones.dimeEntero("ï¿½Cuï¿½ntas unidades quieres reponer?", sc);
->>>>>>> branch 'main' of https://github.com/ELCubi44/Reto3AlejandroMiguel.git
+		int reponer = funciones.dimeEntero("¿Cuántas unidades quieres reponer?", sc);
 		if (reponer <= 0) {
 			System.out.println("Nada que reponer");
 		} else
