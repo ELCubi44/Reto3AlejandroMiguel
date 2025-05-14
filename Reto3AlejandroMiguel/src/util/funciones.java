@@ -341,7 +341,8 @@ public class funciones {
 		Date hoy = ldDate (now);
 		
 		Pedido pedido1 = new Pedido (cliente,precio,direccion,(java.sql.Date) hoy);
-		
+		PedidoDao.inserta(pedido1);
+		System.out.println("Pedido guardado, el precio total es: " + precio);
 	} 
 		
 
