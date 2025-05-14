@@ -21,9 +21,8 @@ public class PedidoProducto {
 	 * @param unidades
 	 * @param precio
 	 */
-	public PedidoProducto(int idPedidoProducto, Pedido pedido, Producto producto, int unidades, double precio) {
+	public PedidoProducto( Pedido pedido, Producto producto, int unidades, double precio) {
 		super();
-		this.idPedidoProducto = idPedidoProducto;
 		this.pedido = pedido;
 		this.producto = producto;
 		this.unidades = unidades;
