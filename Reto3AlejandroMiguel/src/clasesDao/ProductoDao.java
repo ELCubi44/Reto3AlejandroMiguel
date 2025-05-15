@@ -42,8 +42,9 @@ public class ProductoDao {
 	}
 
 	/**
+	 * Metodo para conocer todos los datos de todos los productos
 	 * 
-	 * @return
+	 * @return lista con todos los productos
 	 */
 	public static List<Producto> lista() {
 		List<Producto> productos = new ArrayList<Producto>();

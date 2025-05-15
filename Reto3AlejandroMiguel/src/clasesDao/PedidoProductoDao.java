@@ -47,6 +47,13 @@ public class PedidoProductoDao {
 
 	}
 
+	/**
+	 * Metodo para saber los pedidos que se han realizado en el mes en el que nos
+	 * encontramos
+	 * 
+	 * @param mes Mes actual(valor numerico)
+	 * @return Lista de pedidos, con los productos, realizados en el mes actual
+	 */
 	public static List<PedidoProducto> listaFecha(int mes) {
 		List<PedidoProducto> productos = new ArrayList<>();
 		try {
@@ -71,6 +78,14 @@ public class PedidoProductoDao {
 		return productos;
 	}
 
+	/**
+	 * Metodo para conocer los pedidos y productos que ha realizado y comprado un
+	 * cliente en especifico
+	 * 
+	 * @param idcliente ID unico del cliente que realiza el pedido
+	 * @return Lista de pedidos con los productos que ha realizado un determinado
+	 *         cliente
+	 */
 	public static List<PedidoProducto> listaPcliente(int idcliente) {
 		List<PedidoProducto> productos = new ArrayList<>();
 		try {
@@ -98,15 +113,20 @@ public class PedidoProductoDao {
 		}
 		return productos;
 	}
-	
-	public static List<PedidoProducto> productoMasVendido () {
-		List <PedidoProducto> productos = new ArrayList <PedidoProducto>();
+
+	/**
+	 * Metodo para conocer los productos mas vendidos
+	 * 
+	 * @return Lista con los productos con mas ventas
+	 */
+	public static List<PedidoProducto> productoMasVendido() {
+		List<PedidoProducto> productos = new ArrayList<PedidoProducto>();
 		try {
-			PreparedStatement ps = Conexion.abreConexion()
-					.prepareStatement("select idproducto, SUM(unidades) as ventas from pedidoproducto GROUP BY idproducto order by ventas desc;");
+			PreparedStatement ps = Conexion.abreConexion().prepareStatement(
+					"select idproducto, SUM(unidades) as ventas from pedidoproducto GROUP BY idproducto order by ventas desc;");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				productos.add(new PedidoProducto(new Producto(rs.getInt("idproducto")),rs.getInt("ventas")));
+				productos.add(new PedidoProducto(new Producto(rs.getInt("idproducto")), rs.getInt("ventas")));
 			}
 			rs.close();
 
