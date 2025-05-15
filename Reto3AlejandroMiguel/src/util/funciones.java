@@ -355,7 +355,8 @@ public class funciones {
 		Pedido pedido1 = new Pedido(cliente, precio, direccion, convierteFecha(hoy));
 		PedidoDao.inserta(pedido1);
 		for (int i = 0; i < pedido.size(); i++) {
-			PedidoProducto pedidoProducto = new PedidoProducto (pedido1,pedido.get(i).getIdProducto(),pedido.get(i).getStock())
+			PedidoProducto pedidoProducto = new PedidoProducto (pedido1,pedido.get(i),pedido.get(i).getStock(),pedido.get(i).getPrecio()*pedido.get(i).getStock());
+			PedidoProductoDao.inserta(pedidoProducto);
 		}
 		System.out.println("Pedido guardado, el precio total es: " + precio);
 	}
