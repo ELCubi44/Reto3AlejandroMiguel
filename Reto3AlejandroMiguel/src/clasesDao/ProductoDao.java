@@ -14,6 +14,7 @@ public class ProductoDao {
 
 	/**
 	 * Metodo para listar todos los productos de determinada categoria
+	 * 
 	 * @param idCat, nos pasan la categoria que queremos listar sus productos
 	 * @return una lista con los productos
 	 */
@@ -40,6 +41,10 @@ public class ProductoDao {
 		return productos;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static List<Producto> lista() {
 		List<Producto> productos = new ArrayList<Producto>();
 		try {
@@ -61,6 +66,11 @@ public class ProductoDao {
 		return productos;
 	}
 
+	/**
+	 * Metodo para saber que productos tienen stock menor que 5
+	 * 
+	 * @return lista donde los productos tengan un stock inferior a 5
+	 */
 	public static List<Producto> listaStock() {
 		List<Producto> productos = new ArrayList<>();
 		try {
@@ -78,8 +88,10 @@ public class ProductoDao {
 		}
 		return productos;
 	}
+
 	/**
 	 * Metodo para insertar nuevos productos que nos pasan ya creados
+	 * 
 	 * @param producto, el producto que nos pasan
 	 */
 	public static void inserta(Producto producto) {
@@ -106,8 +118,10 @@ public class ProductoDao {
 			Conexion.cierraConexion();
 		}
 	}
+
 	/**
 	 * Metodo para eliminar stock que estan comprando
+	 * 
 	 * @param producto, nos pasan el producto que compran
 	 * @param unidades, las unidades que compran de ese producto
 	 */
@@ -125,8 +139,11 @@ public class ProductoDao {
 			Conexion.cierraConexion();
 		}
 	}
+
 	/**
-	 * Meotodo para aumentar las unidades de stock que quieres reponer cuando sea menor de 5
+	 * Meotodo para aumentar las unidades de stock que quieres reponer cuando sea
+	 * menor de 5
+	 * 
 	 * @param unidades, las unidades que queremos aumentar nos las pasan
 	 */
 	public static void aumentarStock(int unidades) {

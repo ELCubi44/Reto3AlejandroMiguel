@@ -35,9 +35,9 @@ public class Pedido {
 	/**
 	 * Constrictor con 3 parametros
 	 * 
-	 * @param precioTotal
-	 * @param direccionEnvio
-	 * @param fecha
+	 * @param precioTotal    Precio total del pedido
+	 * @param direccionEnvio Dirección a la que se realiza el pedido
+	 * @param fecha          Fecha en la que se realiza el pedido
 	 */
 	public Pedido(double precioTotal, String direccionEnvio, Date fecha) {
 		super();
@@ -47,12 +47,13 @@ public class Pedido {
 	}
 
 	/**
+	 * Constructor con todos los parametros
 	 * 
-	 * @param idPedido
-	 * @param cliente
-	 * @param precioTotal
-	 * @param direccionEnvio
-	 * @param fecha
+	 * @param idPedido       ID unico del pedido
+	 * @param cliente        Cliente que realiza el pedido
+	 * @param precioTotal    Precio total del pedido
+	 * @param direccionEnvio Dirección a la que se realiza el pedido
+	 * @param fecha          Fecha en la que se realiza el pedido
 	 */
 	public Pedido(int idPedido, Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
 		super();

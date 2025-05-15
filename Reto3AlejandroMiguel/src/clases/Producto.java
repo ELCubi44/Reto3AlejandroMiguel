@@ -20,14 +20,14 @@ public class Producto {
 	/**
 	 * Constructor con todos los parametros para crear un producto
 	 * 
-	 * @param idProducto
-	 * @param categoria
-	 * @param nombre
-	 * @param precio
-	 * @param descripcion
-	 * @param color
-	 * @param talla
-	 * @param stock
+	 * @param idProducto  ID unico del producto
+	 * @param categoria   Categoria del producto
+	 * @param nombre      Nombre del producto
+	 * @param precio      Precio del producto
+	 * @param descripcion Descripcion breve del producto
+	 * @param color       Color del producto
+	 * @param talla       Talla del producto
+	 * @param stock       Stock del producto
 	 */
 	public Producto(int idProducto, Categoria categoria, String nombre, double precio, String descripcion, String color,
 			String talla, int stock) {
@@ -45,13 +45,13 @@ public class Producto {
 	/**
 	 * Constructor que usamos para lista producto en productoDao sin categoria
 	 * 
-	 * @param idProducto
-	 * @param nombre
-	 * @param precio
-	 * @param descripcion
-	 * @param color
-	 * @param talla
-	 * @param stock
+	 * @param idProducto  ID unico del producto
+	 * @param nombre      Nombre del producto
+	 * @param precio      Precio del producto
+	 * @param descripcion Descripcion breve del producto
+	 * @param color       Color del producto
+	 * @param talla       Talla del producto
+	 * @param stock       Stock del producto
 	 */
 	public Producto(int idProducto, String nombre, double precio, String descripcion, String color, String talla,
 			int stock) {
@@ -68,8 +68,8 @@ public class Producto {
 	/**
 	 * Constructor que usamos para bajar el stock de un producto en ProductoDao
 	 * 
-	 * @param idProducto
-	 * @param stock
+	 * @param idProducto ID unico del producto
+	 * @param stock      Stock del producto
 	 */
 	public Producto(int idProducto, int stock) {
 		super();
@@ -78,10 +78,11 @@ public class Producto {
 	}
 
 	/**
+	 * Constructor de 3 parametros
 	 * 
-	 * @param categoria
-	 * @param nombre
-	 * @param stock
+	 * @param categoria Categoria del producto
+	 * @param nombre    Nombre del producto
+	 * @param stock     Stock del producto
 	 */
 	public Producto(Categoria categoria, String nombre, int stock) {
 		super();
