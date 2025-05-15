@@ -412,10 +412,19 @@ public class funciones {
 	public static void productoMvendido() {
 		List <Producto> productos = ProductoDao.lista();
 		List <PedidoProducto> productosVendidosOrdenados = PedidoProductoDao.productoMasVendido();
-		List <Producto> masVendido = new ArrayList <Producto> ();
-		Producto producto;
+		List <Producto> masVendidos = new ArrayList <Producto> ();
+		masVendidos.add(productosVendidosOrdenados.get(0).getProducto());
+		int unidadesMasVendido = productosVendidosOrdenados.get(0).getUnidades();
+		masVendidos.remove(0);
 		for (PedidoProducto pedidoProducto : productosVendidosOrdenados) {
-			if (pedidoProducto.getProducto())
+			if (pedidoProducto.getUnidades()==unidadesMasVendido)
+				masVendidos.add(pedidoProducto.getProducto());
+		}
+		for (Producto producto1 : productos) {
+			for (Producto producto2 : masVendidos) {
+				if(producto1.getIdProducto()==producto2.getIdProducto())
+					System.out.println("Estas son las caracteristicas del producto mas vendido: \r\n"+"Categoria:"+producto1.getCategoria().getNombre()+", Nombre:"+producto1.getNombre()+", Stock:"+producto1.getStock());
+			}
 		}
 		
 	}
