@@ -98,4 +98,23 @@ public class PedidoProductoDao {
 		}
 		return productos;
 	}
+	
+	public static List<PedidoProducto> productoMasVendido () {
+		List <PedidoProducto> productos = new ArrayList <PedidoProducto>();
+		try {
+			PreparedStatement ps = Conexion.abreConexion()
+					.prepareStatement("select idproducto, SUM(unidades) as ventas from pedidoproducto GROUP BY idproducto order by ventas desc;");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				productos.add(new PedidoProducto(new Producto(rs.getInt("idproducto")),rs.getInt("ventas")));
+			}
+			rs.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
 }

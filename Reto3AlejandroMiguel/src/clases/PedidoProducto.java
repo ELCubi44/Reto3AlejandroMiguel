@@ -30,6 +30,18 @@ public class PedidoProducto {
 		this.unidades = unidades;
 		this.precio = precio;
 	}
+	
+	/**
+	 * Constructor para usar en producto mas vendido
+	 * @param producto
+	 * @param unidades
+	 */
+	public PedidoProducto(Producto producto, int unidades) {
+		super();
+		this.producto = producto;
+		this.unidades = unidades;
+	}
+
 
 	/**
 	 * 

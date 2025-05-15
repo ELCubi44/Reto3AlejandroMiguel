@@ -186,7 +186,7 @@ public class funciones {
 
 	public static void gestionCat(Scanner sc) {
 		Categoria cat = new Categoria();
-		cat.setNombre(funciones.dimeString("Introduce el nombre de la categoría:", sc));
+		cat.setNombre(funciones.dimeString("Introduce el nombre de la categorï¿½a:", sc));
 		CategoriaDao.inserta(cat);
 	}
 
@@ -198,7 +198,7 @@ public class funciones {
 		pro.setPrecio(funciones.dimeDouble("Introduce precio del producto", sc));
 		pro.setStock(funciones.dimeEntero("Introduce cantidad del producto", sc));
 		pro.setTall(funciones.dimeString("Introduce talla del producto:", sc));
-		System.out.println("Lista de categorías:");
+		System.out.println("Lista de categorï¿½as:");
 		for (Categoria c : CategoriaDao.lista()) {
 			System.out.println(c.getIdCategoria() + c.getNombre());
 		}
@@ -213,12 +213,12 @@ public class funciones {
 
 	public static void altaClientes(Scanner sc) {
 		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
-				funciones.dimeString("Introduce la dirección:", sc), funciones.dimeEntero("Introduce el código:", sc));
+				funciones.dimeString("Introduce la direcciï¿½n:", sc), funciones.dimeEntero("Introduce el cï¿½digo:", sc));
 		ClienteDao.inserta(cliente);
 	}
 
 	public static void busCod(Scanner sc) {
-		int codBuscar = funciones.dimeEntero("Introduce el código de cliente a buscar:", sc);
+		int codBuscar = funciones.dimeEntero("Introduce el cï¿½digo de cliente a buscar:", sc);
 		boolean buscar = false;
 		for (Cliente c : ClienteDao.lista()) {
 			if (c.getCodigo() == codBuscar) {
@@ -231,15 +231,15 @@ public class funciones {
 			System.out.println("No existe, creando uno nuevo...");
 			Cliente cliente = new Cliente();
 			cliente.setNombre(funciones.dimeString("Introduce el nombre del cliente:", sc));
-			cliente.setDireccion(funciones.dimeString("Introduce la dirección:", sc));
-			cliente.setCodigo(funciones.dimeEntero("Introduce el código:", sc));
+			cliente.setDireccion(funciones.dimeString("Introduce la direcciï¿½n:", sc));
+			cliente.setCodigo(funciones.dimeEntero("Introduce el cï¿½digo:", sc));
 			ClienteDao.inserta(cliente);
 		}
 	}
 
 	public static void listarProductos(Scanner sc) {
 		List<Categoria> categorias = CategoriaDao.lista();
-		System.out.println("Lista de categorías");
+		System.out.println("Lista de categorï¿½as");
 		for (Categoria c : categorias) {
 			System.out.println(c.getIdCategoria() + " " + c.getNombre());
 		}
@@ -378,7 +378,7 @@ public class funciones {
 			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
 					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
-		int reponer = funciones.dimeEntero("¿Cuántas unidades quieres reponer?", sc);
+		int reponer = funciones.dimeEntero("ï¿½Cuï¿½ntas unidades quieres reponer?", sc);
 		if (reponer <= 0) {
 			System.out.println("Nada que reponer");
 		} else
@@ -404,15 +404,19 @@ public class funciones {
 							+ p.getUnidades());
 				}
 			} else
-				System.out.println("Lista vacía");
+				System.out.println("Lista vacï¿½a");
 		} else
 			System.out.println("No existe cliente");
 	}
 
 	public static void productoMvendido() {
-		for (PedidoProducto p : lista) {
-			System.out.println(p);
-			// mostrar categoria,nombre,stock
+		List <Producto> productos = ProductoDao.lista();
+		List <PedidoProducto> productosVendidosOrdenados = PedidoProductoDao.productoMasVendido();
+		List <Producto> masVendido = new ArrayList <Producto> ();
+		Producto producto;
+		for (PedidoProducto pedidoProducto : productosVendidosOrdenados) {
+			if (pedidoProducto.getProducto())
 		}
+		
 	}
 }

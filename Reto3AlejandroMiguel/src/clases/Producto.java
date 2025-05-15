@@ -90,6 +90,15 @@ public class Producto {
 		this.nombre = nombre;
 		this.stock = stock;
 	}
+	
+	/**
+	 * Constructor para usar en top ventas
+	 * @param idProducto
+	 */
+	public Producto(int idProducto) {
+		super();
+		this.idProducto = idProducto;
+	}
 
 	/**
 	 * Constructor vacio
