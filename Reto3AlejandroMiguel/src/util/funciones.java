@@ -419,7 +419,7 @@ public class funciones {
 		for (PedidoProducto pedidoProducto : productosVendidosOrdenados) {
 			if (pedidoProducto.getUnidades()==unidadesMasVendido)
 				masVendidos.add(pedidoProducto.getProducto());
-		}
+		} 
 		for (Producto producto1 : productos) {
 			for (Producto producto2 : masVendidos) {
 				if(producto1.getIdProducto()==producto2.getIdProducto())
