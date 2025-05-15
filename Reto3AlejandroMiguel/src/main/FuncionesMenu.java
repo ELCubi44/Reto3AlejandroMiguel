@@ -99,7 +99,9 @@ public class FuncionesMenu {
 		System.out.println("Introduce la talla del producto:");
 		String talla = sc.nextLine();
 		pro.setTall(talla);
-		// terminar
+		for (Producto p : lista) {
+			System.out.println(p);
+		}
 	}
 
 	public static void crearPedido(Scanner sc) {
