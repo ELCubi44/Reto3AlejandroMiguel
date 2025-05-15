@@ -66,6 +66,28 @@ public class Producto {
 	}
 
 	/**
+	 * 
+	 * @param idProducto
+	 * @param nombre
+	 * @param precio
+	 * @param descripcion
+	 * @param color
+	 * @param talla
+	 * @param stock
+	 */
+	public Producto(Categoria categoria, String nombre, double precio, String descripcion, String color, String talla,
+			int stock) {
+		super();
+		this.categoria = categoria;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.descripcion = descripcion;
+		this.color = color;
+		this.talla = talla;
+		this.stock = stock;
+	}
+
+	/**
 	 * Constructor que usamos para bajar el stock de un producto en ProductoDao
 	 * 
 	 * @param idProducto ID unico del producto
@@ -90,9 +112,10 @@ public class Producto {
 		this.nombre = nombre;
 		this.stock = stock;
 	}
-	
+
 	/**
 	 * Constructor para usar en top ventas
+	 * 
 	 * @param idProducto
 	 */
 	public Producto(int idProducto) {

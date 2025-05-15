@@ -161,14 +161,15 @@ public class ProductoDao {
 		}
 	}
 
-	public static List<Producto> listaProducto() {
+	public static List<Producto> listaProducto(String nombre, String color, String talla) {
 		List<Producto> productos = new ArrayList<>();
 		try {
 			ResultSet rs = Conexion.abreConexion()
-					.prepareStatement("select * from productos where nombre like '%"+a+"%'").executeQuery();
+					.prepareStatement("select * from productos where nombre like '%" + nombre + "%'").executeQuery();
 			while (rs.next()) {
-				productos.add(new Producto(rs.getInt("idproducto"), rs.getString("nombre"), rs.getDouble("precio"),
-						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+				productos.add(new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"),
+						rs.getDouble("precio"), rs.getString("Descripcion"), rs.getString("color"),
+						rs.getString("talla"), rs.getInt("stock")));
 			}
 			rs.close();
 		} catch (Exception e) {

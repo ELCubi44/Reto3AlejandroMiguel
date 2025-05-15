@@ -99,7 +99,7 @@ public class FuncionesMenu {
 		System.out.println("Introduce la talla del producto:");
 		String talla = sc.nextLine();
 		pro.setTall(talla);
-		for (Producto p : lista) {
+		for (Producto p : ProductoDao.listaProducto(nombre, color, talla)) {
 			System.out.println(p);
 		}
 	}
