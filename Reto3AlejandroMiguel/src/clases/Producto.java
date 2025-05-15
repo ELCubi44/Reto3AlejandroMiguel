@@ -16,8 +16,10 @@ public class Producto {
 	private String color;
 	private String talla;
 	private int stock;
+
 	/**
 	 * Constructor con todos los parametros para crear un producto
+	 * 
 	 * @param idProducto
 	 * @param categoria
 	 * @param nombre
@@ -39,8 +41,10 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
+
 	/**
 	 * Constructor que usamos para lista producto en productoDao sin categoria
+	 * 
 	 * @param idProducto
 	 * @param nombre
 	 * @param precio
@@ -60,8 +64,10 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
+
 	/**
 	 * Constructor que usamos para bajar el stock de un producto en ProductoDao
+	 * 
 	 * @param idProducto
 	 * @param stock
 	 */
@@ -70,6 +76,20 @@ public class Producto {
 		this.idProducto = idProducto;
 		this.stock = stock;
 	}
+
+	/**
+	 * 
+	 * @param categoria
+	 * @param nombre
+	 * @param stock
+	 */
+	public Producto(Categoria categoria, String nombre, int stock) {
+		super();
+		this.categoria = categoria;
+		this.nombre = nombre;
+		this.stock = stock;
+	}
+
 	/**
 	 * Constructor vacio
 	 */
@@ -147,5 +167,5 @@ public class Producto {
 				+ precio + ", descripcion=" + descripcion + ", color=" + color + ", tall=" + talla + ", stock=" + stock
 				+ "]";
 	}
-	
+
 }

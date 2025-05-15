@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import clases.Categoria;
 import clases.Conexion;
 import clases.Pedido;
 import clases.PedidoProducto;
@@ -59,6 +60,34 @@ public class PedidoProductoDao {
 			while (rs.next()) {
 				productos.add(new PedidoProducto(rs.getInt("a.idpedidoproducto"), new Pedido(), new Producto(),
 						rs.getInt("a.unidades"), rs.getDouble("a.precio")));
+			}
+			rs.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+
+	public static List<PedidoProducto> listaPcliente(int idcliente) {
+		List<PedidoProducto> productos = new ArrayList<>();
+		try {
+			PreparedStatement ps = Conexion.abreConexion().prepareStatement(
+					"select b.fecha,b.precioTotal,b.direccionEnvio,a.unidades,d.nombre,d.idcategoria from pedidoproducto a \r\n"
+							+ "inner join pedidos b on b.idpedido=a.idpedido\r\n"
+							+ "inner join clientes c on c.idcliente=b.idcliente\r\n"
+							+ "inner join productos d on d.idproducto=a.idproducto\r\n" + "where c.idcliente=?");
+			ps.setInt(1, idcliente);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				productos.add(new PedidoProducto(
+						new Pedido(rs.getDouble("b.precioTotal"), rs.getString("b.direccionEnvio"),
+								rs.getDate("b.fecha")),
+						new Producto(new Categoria(rs.getInt("d.idcategoria")), rs.getString("d.nombre"),
+								rs.getInt("d.stock")),
+						rs.getInt("a.unidades")));
 			}
 			rs.close();
 

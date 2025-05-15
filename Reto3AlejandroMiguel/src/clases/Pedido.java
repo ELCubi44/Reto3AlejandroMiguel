@@ -17,15 +17,46 @@ public class Pedido {
 	private Date fecha;
 
 	/**
-	 * Constructor con todos los parametros para crear pedidos
+	 * Constructor con 4 parametros para crear pedidos
 	 * 
+	 * @param cliente        Cliente que realiza el pedido
+	 * @param precioTotal    Precio total del pedido
+	 * @param direccionEnvio Dirección a la que se realiza el pedido
+	 * @param fecha          Fecha en la que se realiza el pedido
+	 */
+	public Pedido(Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
+		super();
+		this.cliente = cliente;
+		this.precioTotal = precioTotal;
+		this.direccionEnvio = direccionEnvio;
+		this.fecha = fecha;
+	}
+
+	/**
+	 * Constrictor con 3 parametros
+	 * 
+	 * @param precioTotal
+	 * @param direccionEnvio
+	 * @param fecha
+	 */
+	public Pedido(double precioTotal, String direccionEnvio, Date fecha) {
+		super();
+		this.precioTotal = precioTotal;
+		this.direccionEnvio = direccionEnvio;
+		this.fecha = fecha;
+	}
+
+	/**
+	 * 
+	 * @param idPedido
 	 * @param cliente
 	 * @param precioTotal
 	 * @param direccionEnvio
 	 * @param fecha
 	 */
-	public Pedido(Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
+	public Pedido(int idPedido, Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
 		super();
+		this.idPedido = idPedido;
 		this.cliente = cliente;
 		this.precioTotal = precioTotal;
 		this.direccionEnvio = direccionEnvio;

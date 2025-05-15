@@ -13,21 +13,54 @@ public class PedidoProducto {
 	private Producto producto;
 	private int unidades;
 	private double precio;
+
 	/**
 	 * Constructor con todos los parametros para crear PedidoProducto
+	 * 
 	 * @param idPedidoProducto
 	 * @param pedido
 	 * @param producto
 	 * @param unidades
 	 * @param precio
 	 */
-	public PedidoProducto( Pedido pedido, Producto producto, int unidades, double precio) {
+	public PedidoProducto(Pedido pedido, Producto producto, int unidades, double precio) {
 		super();
 		this.pedido = pedido;
 		this.producto = producto;
 		this.unidades = unidades;
 		this.precio = precio;
 	}
+
+	/**
+	 * 
+	 * @param pedido
+	 * @param producto
+	 * @param unidades
+	 */
+	public PedidoProducto(Pedido pedido, Producto producto, int unidades) {
+		super();
+		this.pedido = pedido;
+		this.producto = producto;
+		this.unidades = unidades;
+	}
+
+	/**
+	 * 
+	 * @param idPedidoProducto
+	 * @param pedido
+	 * @param producto
+	 * @param unidades
+	 * @param precio
+	 */
+	public PedidoProducto(int idPedidoProducto, Pedido pedido, Producto producto, int unidades, double precio) {
+		super();
+		this.idPedidoProducto = idPedidoProducto;
+		this.pedido = pedido;
+		this.producto = producto;
+		this.unidades = unidades;
+		this.precio = precio;
+	}
+
 	/**
 	 * Constructor vacio
 	 */
@@ -80,5 +113,5 @@ public class PedidoProducto {
 		return "PedidoProducto [idPedidoProducto=" + idPedidoProducto + ", pedido=" + pedido + ", producto=" + producto
 				+ ", unidades=" + unidades + ", precio=" + precio + "]";
 	}
-	
+
 }
