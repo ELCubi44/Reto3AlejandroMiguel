@@ -105,7 +105,7 @@ public class PedidoProductoDao {
 						new Producto(new Categoria(rs.getInt("d.idcategoria")), rs.getString("d.nombre"),
 								rs.getInt("d.stock")),
 						rs.getInt("a.unidades")));
-			}
+			} 
 			rs.close();
 
 		} catch (Exception e) {
@@ -114,7 +114,7 @@ public class PedidoProductoDao {
 			Conexion.cierraConexion();
 		}
 		return productos;
-	}
+	} 
 
 	/**
 	 * Metodo para conocer los productos mas vendidos
