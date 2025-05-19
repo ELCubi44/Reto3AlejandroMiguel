@@ -28,7 +28,7 @@ public class PedidoProductoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO pedido ('idpedido','idproducto','unidades','precio') VALUES (?,?,?,?);",
+					"INSERT INTO pedidoproducto (idpedido,idproducto,unidades,precio) VALUES (?,?,?,?);",
 					Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, pedido.getPedido().getIdPedido());
 			pst.setDouble(2, pedido.getProducto().getIdProducto());

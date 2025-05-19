@@ -50,7 +50,7 @@ public class ClienteDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO categoria ('nombre','direccion','codigo') VALUES (?,?,?);",
+					"INSERT INTO clientes (nombre,direccion,codigo) VALUES (?,?,?);",
 					Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, cliente.getNombre());
 			pst.setString(2, cliente.getDireccion());
