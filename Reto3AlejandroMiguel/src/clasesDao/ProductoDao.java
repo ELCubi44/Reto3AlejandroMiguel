@@ -106,11 +106,11 @@ public class ProductoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO producto ('idCategoria','nombre','precio','descripcion','color','talla','stock) VALUES (?);",
+					"INSERT INTO productos (idCategoria,nombre,precio,descripcion,color,talla,stock) VALUES (?,?,?,?,?,?,?);",
 					Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, producto.getCategoria().getIdCategoria());
 			pst.setString(2, producto.getNombre());
-			pst.setDouble(3, producto.getIdProducto());
+			pst.setDouble(3, producto.getPrecio());
 			pst.setString(4, producto.getDescripcion());
 			pst.setString(5, producto.getColor());
 			pst.setString(6, producto.getTalla());
