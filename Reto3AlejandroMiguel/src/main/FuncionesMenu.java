@@ -19,7 +19,7 @@ public class FuncionesMenu {
 
 	public static void gestionCat(Scanner sc) {
 		Categoria cat = new Categoria();
-		cat.setNombre(funciones.dimeString("Introduce el nombre de la categor�a:", sc));
+		cat.setNombre(funciones.dimeString("Introduce el nombre de la categoria:", sc));
 		CategoriaDao.inserta(cat);
 	}
 
@@ -27,11 +27,11 @@ public class FuncionesMenu {
 		Producto pro = new Producto();
 		pro.setNombre(funciones.dimeString("Introduce nombre del producto:", sc));
 		pro.setColor(funciones.dimeString("Introduce color del producto:", sc));
-		pro.setDescripcion(funciones.dimeString("Introduce descripci�n del producto", sc));
+		pro.setDescripcion(funciones.dimeString("Introduce descripcion del producto", sc));
 		pro.setPrecio(funciones.dimeDouble("Introduce precio del producto", sc));
 		pro.setStock(funciones.dimeEntero("Introduce cantidad del producto", sc));
 		pro.setTall(funciones.dimeString("Introduce talla del producto:", sc));
-		System.out.println("Lista de categor�as:");
+		System.out.println("Lista de categorias:");
 		for (Categoria c : CategoriaDao.lista()) {
 			System.out.println(c.getIdCategoria() + c.getNombre());
 		}
@@ -46,13 +46,12 @@ public class FuncionesMenu {
 
 	public static void altaClientes(Scanner sc) {
 		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
-				funciones.dimeString("Introduce la direcci�n:", sc),
-				funciones.dimeEntero("Introduce el c�digo:", sc));
+				funciones.dimeString("Introduce la direccion:", sc), funciones.dimeEntero("Introduce el codigo:", sc));
 		ClienteDao.inserta(cliente);
 	}
 
 	public static void busCod(Scanner sc) {
-		int codBuscar = funciones.dimeEntero("Introduce el c�digo de cliente a buscar:", sc);
+		int codBuscar = funciones.dimeEntero("Introduce el codigo de cliente a buscar:", sc);
 		boolean buscar = false;
 		for (Cliente c : ClienteDao.lista()) {
 			if (c.getCodigo() == codBuscar) {
@@ -65,15 +64,15 @@ public class FuncionesMenu {
 			System.out.println("No existe, creando uno nuevo...");
 			Cliente cliente = new Cliente();
 			cliente.setNombre(funciones.dimeString("Introduce el nombre del cliente:", sc));
-			cliente.setDireccion(funciones.dimeString("Introduce la direcci�n:", sc));
-			cliente.setCodigo(funciones.dimeEntero("Introduce el c�digo:", sc));
+			cliente.setDireccion(funciones.dimeString("Introduce la direccion:", sc));
+			cliente.setCodigo(funciones.dimeEntero("Introduce el codigo:", sc));
 			ClienteDao.inserta(cliente);
 		}
 	}
 
 	public static void listarProductos(Scanner sc) {
 		List<Categoria> categorias = CategoriaDao.lista();
-		System.out.println("Lista de categor�as");
+		System.out.println("Lista de categorias");
 		for (Categoria c : categorias) {
 			System.out.println(c.getIdCategoria() + " " + c.getNombre());
 		}
@@ -87,6 +86,7 @@ public class FuncionesMenu {
 			}
 		}
 	}
+
 
 //	public static void buscarProd(Scanner sc) {
 //		Producto pro = new Producto();
@@ -103,6 +103,22 @@ public class FuncionesMenu {
 //			System.out.println(p);
 //		}
 //	}
+
+	public static void buscarProd(Scanner sc) {
+		Producto pro = new Producto();
+		System.out.println("Introduce el nombre del producto:");
+		String nombre = sc.nextLine();
+		pro.setNombre(nombre);
+		System.out.println("Introduce el color del producto:");
+		String color = sc.nextLine();
+		pro.setColor(color);
+		System.out.println("Introduce la talla del producto:");
+		String talla = sc.nextLine();
+		pro.setTall(talla);
+		for (Producto p : ProductoDao.listaProducto(nombre, color, talla)) {
+			System.out.println(p);
+		}
+	}
 
 	public static void crearPedido(Scanner sc) {
 		List<Cliente> clientes = ClienteDao.lista();
@@ -166,7 +182,7 @@ public class FuncionesMenu {
 				cliente = cliente2;
 				direccion = cliente2.getDireccion();
 				System.out.println(cliente2.getDireccion());
-				System.out.println("Esta es tu direccion de envio, ¿deseas cambiarla? (Si / No):");
+				System.out.println("Esta es tu direccion de envio, �deseas cambiarla? (Si / No):");
 			}
 		}
 
@@ -214,7 +230,7 @@ public class FuncionesMenu {
 			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
 					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
-		int reponer = funciones.dimeEntero("�Cu�ntas unidades quieres reponer?", sc);
+		int reponer = funciones.dimeEntero("�Cuantas unidades quieres reponer?", sc);
 		if (reponer <= 0) {
 			System.out.println("Nada que reponer");
 		} else
@@ -240,7 +256,7 @@ public class FuncionesMenu {
 							+ p.getUnidades());
 				}
 			} else
-				System.out.println("Lista vac�a");
+				System.out.println("Lista vacia");
 		} else
 			System.out.println("No existe cliente");
 	}

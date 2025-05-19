@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clases.Categoria;
-import clases.Conexion;
 import clases.Pedido;
 import clases.PedidoProducto;
 import clases.Producto;
+import util.Conexion;
 
 public class PedidoProductoDao {
 	/**

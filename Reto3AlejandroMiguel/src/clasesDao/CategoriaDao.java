@@ -5,10 +5,15 @@ package clasesDao;
  * @since 14/05/2025
  * @version 1
  */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.sql.*;
-import java.util.*;
-import clases.*;
+import clases.Categoria;
+import util.Conexion;
 
 public class CategoriaDao {
 	/**

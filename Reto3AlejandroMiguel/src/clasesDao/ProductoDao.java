@@ -1,14 +1,21 @@
 package clasesDao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  * @author Alejandro y Miguel
  * @since 14/05/2025
  * @version 1
  */
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
-import java.sql.*;
-import clases.*;
+import clases.Categoria;
+import clases.Producto;
+import util.Conexion;
 
 public class ProductoDao {
 
@@ -161,6 +168,7 @@ public class ProductoDao {
 		}
 	}
 
+
 //	public static List<Producto> listaProducto() {
 //		List<Producto> productos = new ArrayList<>();
 //		try {
@@ -178,4 +186,23 @@ public class ProductoDao {
 //		}
 //		return productos;
 //	}
+
+	public static List<Producto> listaProducto(String nombre, String color, String talla) {
+		List<Producto> productos = new ArrayList<>();
+		try {
+			ResultSet rs = Conexion.abreConexion()
+					.prepareStatement("select * from productos where nombre like '%" + nombre + "%'").executeQuery();
+			while (rs.next()) {
+				productos.add(new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"),
+						rs.getDouble("precio"), rs.getString("Descripcion"), rs.getString("color"),
+						rs.getString("talla"), rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
 }

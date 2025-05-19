@@ -10,7 +10,7 @@ public class inicio {
 		int opcion = 0;
 		do {
 			opcion = funciones.dimeEntero(
-					"Men�:\r\n1-Mantenimientos\r\n2-Cat�logo de productos\r\n3-Pedidos\r\n4-Informes\r\n5-Salir", sc);
+					"Menu:\r\n1-Mantenimientos\r\n2-Catalogo de productos\r\n3-Pedidos\r\n4-Informes\r\n5-Salir", sc);
 			switch (opcion) {
 			case 1:
 				submenu1(sc);
@@ -28,18 +28,18 @@ public class inicio {
 				System.out.println("Saliendo...");
 				break;
 			default:
-				System.out.println("Opci�n no v�lida");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (opcion != 5);
-
+		sc.close();
 	}
 
 	public static void submenu1(Scanner sc) {
 		int opcion = 0;
 		do {
 			opcion = funciones.dimeEntero(
-					"1-Gesti�n de categor�as\r\n2-Gesti�n de productos\r\n3-Gesti�n de clientes\r\n4-Volver", sc);
+					"1-Gestion de categorias\r\n2-Gestion de productos\r\n3-Gestion de clientes\r\n4-Volver", sc);
 			switch (opcion) {
 			case 1:
 				FuncionesMenu.gestionCat(sc);
@@ -54,7 +54,7 @@ public class inicio {
 				System.out.println("Volviendo...");
 				break;
 			default:
-				System.out.println("Opci�n no v�lida");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (opcion != 4);
@@ -63,7 +63,7 @@ public class inicio {
 	public static void submenu11(Scanner sc) {
 		int opcion = 0;
 		do {
-			opcion = funciones.dimeEntero("1-Alta de nuevos clientes\r\n2-B�squeda por c�digo\r\n3-Volver", sc);
+			opcion = funciones.dimeEntero("1-Alta de nuevos clientes\r\n2-Busqueda por codigo\r\n3-Volver", sc);
 			switch (opcion) {
 			case 1:
 				FuncionesMenu.altaClientes(sc);
@@ -75,7 +75,7 @@ public class inicio {
 				System.out.println("Volviendo...");
 				break;
 			default:
-				System.out.println("Opci�n no v�lida");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (opcion != 3);
@@ -84,7 +84,7 @@ public class inicio {
 	public static void submenu2(Scanner sc) {
 		int opcion = 0;
 		do {
-			opcion = funciones.dimeEntero("1-Listar productos por categor�a\r\n2-Buscar productos\r\n3-Volver", sc);
+			opcion = funciones.dimeEntero("1-Listar productos por categoria\r\n2-Buscar productos\r\n3-Volver", sc);
 			switch (opcion) {
 			case 1:
 				FuncionesMenu.listarProductos(sc);
@@ -96,7 +96,7 @@ public class inicio {
 				System.out.println("Volviendo...");
 				break;
 			default:
-				System.out.println("Opci�n no v�lida");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (opcion != 3);
@@ -117,7 +117,7 @@ public class inicio {
 				System.out.println("Volviendo...");
 				break;
 			default:
-				System.out.println("Opci�n no v�lida");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (opcion != 3);
@@ -126,7 +126,7 @@ public class inicio {
 	public static void submenu4(Scanner sc) {
 		int opcion = 0;
 		do {
-			opcion = funciones.dimeEntero("1-Bajo stock\r\n2-Pedidos por cliente\r\n3-Producto m�s vendido\r\n4-Volver",
+			opcion = funciones.dimeEntero("1-Bajo stock\r\n2-Pedidos por cliente\r\n3-Producto mas vendido\r\n4-Volver",
 					sc);
 			switch (opcion) {
 			case 1:
@@ -142,7 +142,7 @@ public class inicio {
 				System.out.println("Volviendo...");
 				break;
 			default:
-				System.out.println("Opci�n no v�lida");
+				System.out.println("Opcion no valida");
 				break;
 			}
 		} while (opcion != 4);
