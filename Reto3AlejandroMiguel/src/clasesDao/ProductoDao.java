@@ -85,7 +85,7 @@ public class ProductoDao {
 			ResultSet rs = util.Conexion.abreConexion().prepareStatement("select * from productos where stock<5")
 					.executeQuery();
 			while (rs.next()) {
-				productos.add(new Producto(rs.getInt("idproducto"), rs.getString("nombre"), rs.getDouble("precio"),
+				productos.add(new Producto(rs.getInt("idproducto"),new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"), rs.getDouble("precio"),
 						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
 			}
 			rs.close();
