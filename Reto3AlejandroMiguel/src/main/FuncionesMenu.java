@@ -88,21 +88,21 @@ public class FuncionesMenu {
 		}
 	}
 
-	public static void buscarProd(Scanner sc) {
-		Producto pro = new Producto();
-		System.out.println("Introduce el nombre del producto:");
-		String nombre = sc.nextLine();
-		pro.setNombre(nombre);
-		System.out.println("Introduce el color del producto:");
-		String color = sc.nextLine();
-		pro.setColor(color);
-		System.out.println("Introduce la talla del producto:");
-		String talla = sc.nextLine();
-		pro.setTall(talla);
-		for (Producto p : lista) {
-			System.out.println(p);
-		}
-	}
+//	public static void buscarProd(Scanner sc) {
+//		Producto pro = new Producto();
+//		System.out.println("Introduce el nombre del producto:");
+//		String nombre = sc.nextLine();
+//		pro.setNombre(nombre);
+//		System.out.println("Introduce el color del producto:");
+//		String color = sc.nextLine();
+//		pro.setColor(color);
+//		System.out.println("Introduce la talla del producto:");
+//		String talla = sc.nextLine();
+//		pro.setTall(talla);
+//		for (Producto p : lista) {
+//			System.out.println(p);
+//		}
+//	}
 
 	public static void crearPedido(Scanner sc) {
 		List<Cliente> clientes = ClienteDao.lista();

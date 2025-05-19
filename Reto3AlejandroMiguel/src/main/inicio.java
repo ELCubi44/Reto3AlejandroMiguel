@@ -90,7 +90,7 @@ public class inicio {
 				FuncionesMenu.listarProductos(sc);
 				break;
 			case 2:
-				FuncionesMenu.buscarProd(sc);
+//				FuncionesMenu.buscarProd(sc);
 				break;
 			case 3:
 				System.out.println("Volviendo...");
