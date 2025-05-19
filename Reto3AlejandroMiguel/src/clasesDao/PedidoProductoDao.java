@@ -57,10 +57,11 @@ public class PedidoProductoDao {
 	public static List<PedidoProducto> listaFecha(int mes) {
 		List<PedidoProducto> productos = new ArrayList<>();
 		try {
-			PreparedStatement ps = util.Conexion.abreConexion()
-					.prepareStatement("select *\r\n" + "from pedidoproducto a\r\n"
-							+ "inner join productos b on b.idproducto=a.idproducto\r\n"
+			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
+					"select c.fecha,d.nombre,c.precioTotal,c.direccionEnvio,b.idcategoria,a.unidades,b.nombre\r\n"
+							+ "from pedidoproducto a\r\n" + "inner join productos b on b.idproducto=a.idproducto\r\n"
 							+ "inner join pedidos c on c.idpedido=a.idpedido\r\n"
+							+ "inner join clientes d on d.idcliente=c.idcliente\r\n"
 							+ "where month(c.fecha)=? order by c.fecha desc");
 			ps.setInt(1, mes);
 			ResultSet rs = ps.executeQuery();

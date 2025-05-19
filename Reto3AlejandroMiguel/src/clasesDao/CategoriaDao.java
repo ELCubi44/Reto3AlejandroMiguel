@@ -45,7 +45,7 @@ public class CategoriaDao {
 	public static void inserta (Categoria categoria) {
 		try {
 			Connection con = util.Conexion.abreConexion();
-			PreparedStatement pst = con.prepareStatement("INSERT INTO categoria ('nombre') VALUES (?);", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pst = con.prepareStatement("INSERT INTO categoria ('nombre') VALUES ?;", Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1,categoria.getNombre());
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
