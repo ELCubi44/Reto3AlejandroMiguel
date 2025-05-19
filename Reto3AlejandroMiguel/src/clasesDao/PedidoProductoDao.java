@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clases.Categoria;
+import clases.Cliente;
 import clases.Pedido;
 import clases.PedidoProducto;
 import clases.Producto;
@@ -58,14 +59,15 @@ public class PedidoProductoDao {
 		List<PedidoProducto> productos = new ArrayList<>();
 		try {
 			PreparedStatement ps = util.Conexion.abreConexion()
-					.prepareStatement("select *\r\n" + "from pedidoproducto a\r\n"
+					.prepareStatement("select *,d.nombre as nombrecliente,b.nombre as nombreproducto\r\n" + "from pedidoproducto a\r\n"
 							+ "inner join productos b on b.idproducto=a.idproducto\r\n"
 							+ "inner join pedidos c on c.idpedido=a.idpedido\r\n"
+							+ "inner join clientes d on d.idcliente=c.idcliente\r\n"
 							+ "where month(c.fecha)=? order by c.fecha desc");
 			ps.setInt(1, mes);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				productos.add(new PedidoProducto(rs.getInt("a.idpedidoproducto"), new Pedido(), new Producto(),
+				productos.add(new PedidoProducto(rs.getInt("a.idpedidoproducto"), new Pedido(new Cliente(rs.getString("nombrecliente")),rs.getInt("precioTotal"),rs.getString("direccionenvio"),rs.getDate("fecha")), new Producto(new Categoria(rs.getInt("idcategoria")),rs.getString("nombreproducto")),
 						rs.getInt("a.unidades"), rs.getDouble("a.precio")));
 			}
 			rs.close();

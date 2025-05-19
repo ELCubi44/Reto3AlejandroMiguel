@@ -29,6 +29,14 @@ public class Cliente {
 		this.direccion = direccion;
 		this.codigo = codigo;
 	}
+	/**
+	 * 
+	 * @param nombre
+	 */
+	public Cliente(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 
 	/**
 	 * Constructor de un solo parametro para crear clientes.

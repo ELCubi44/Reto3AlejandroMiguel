@@ -112,6 +112,16 @@ public class Producto {
 		this.nombre = nombre;
 		this.stock = stock;
 	}
+	/**
+	 * 
+	 * @param categoria
+	 * @param nombre
+	 */
+	public Producto(Categoria categoria, String nombre) {
+		super();
+		this.categoria = categoria;
+		this.nombre = nombre;
+	}
 
 	/**
 	 * Constructor para usar en top ventas
