@@ -100,7 +100,7 @@ public class inicio {
 				break;
 			}
 		} while (opcion != 3);
-	}
+	} 
 
 	public static void submenu3(Scanner sc) {
 		int opcion = 0;

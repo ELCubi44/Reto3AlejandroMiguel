@@ -26,7 +26,7 @@ public class PedidoDao {
 	public static List<Pedido> lista() {
 		List<Pedido> pedidos = new ArrayList<Pedido>();
 		try {
-			Connection con = Conexion.abreConexion();
+			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
 					"SELECT idpedido,idcliente,precioTotal,direccionEnvio,fecha FROM proyecto3ev.pedidos;");
 			ResultSet rs = pst.executeQuery();
@@ -50,7 +50,7 @@ public class PedidoDao {
 	 */
 	public static void inserta(Pedido pedido) {
 		try {
-			Connection con = Conexion.abreConexion();
+			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
 					"INSERT INTO pedido ('idcliente','precioTotal','direccionEnvio','fecha') VALUES (?,?,?,?);",
 					Statement.RETURN_GENERATED_KEYS);

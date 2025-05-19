@@ -26,7 +26,7 @@ public class PedidoProductoDao {
 	 */
 	public static void inserta(PedidoProducto pedido) {
 		try {
-			Connection con = Conexion.abreConexion();
+			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
 					"INSERT INTO pedido ('idpedido','idproducto','unidades','precio') VALUES (?,?,?,?);",
 					Statement.RETURN_GENERATED_KEYS);
@@ -57,7 +57,7 @@ public class PedidoProductoDao {
 	public static List<PedidoProducto> listaFecha(int mes) {
 		List<PedidoProducto> productos = new ArrayList<>();
 		try {
-			PreparedStatement ps = Conexion.abreConexion()
+			PreparedStatement ps = util.Conexion.abreConexion()
 					.prepareStatement("select *\r\n" + "from pedidoproducto a\r\n"
 							+ "inner join productos b on b.idproducto=a.idproducto\r\n"
 							+ "inner join pedidos c on c.idpedido=a.idpedido\r\n"
@@ -89,7 +89,7 @@ public class PedidoProductoDao {
 	public static List<PedidoProducto> listaPcliente(int idcliente) {
 		List<PedidoProducto> productos = new ArrayList<>();
 		try {
-			PreparedStatement ps = Conexion.abreConexion().prepareStatement(
+			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
 					"select b.fecha,b.precioTotal,b.direccionEnvio,a.unidades,d.nombre,d.idcategoria from pedidoproducto a \r\n"
 							+ "inner join pedidos b on b.idpedido=a.idpedido\r\n"
 							+ "inner join clientes c on c.idcliente=b.idcliente\r\n"
@@ -122,7 +122,7 @@ public class PedidoProductoDao {
 	public static List<PedidoProducto> productoMasVendido() {
 		List<PedidoProducto> productos = new ArrayList<PedidoProducto>();
 		try {
-			PreparedStatement ps = Conexion.abreConexion().prepareStatement(
+			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
 					"select idproducto, SUM(unidades) as ventas from pedidoproducto GROUP BY idproducto order by ventas desc;");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
