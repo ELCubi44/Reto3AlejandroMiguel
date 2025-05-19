@@ -1,14 +1,21 @@
 package clasesDao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  * @author Alejandro y Miguel
  * @since 14/05/2025
  * @version 1
  */
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
-import java.sql.*;
-import clases.*;
+import clases.Categoria;
+import clases.Producto;
+import util.Conexion;
 
 public class ProductoDao {
 
