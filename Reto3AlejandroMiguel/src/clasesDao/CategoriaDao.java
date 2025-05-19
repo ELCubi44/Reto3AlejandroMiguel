@@ -50,7 +50,7 @@ public class CategoriaDao {
 
 			PreparedStatement pst = con.prepareStatement("INSERT INTO categorias (nombre) VALUES (?);",
 					Statement.RETURN_GENERATED_KEYS);
-
+ 
 			pst.setString(1, categoria.getNombre());
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
