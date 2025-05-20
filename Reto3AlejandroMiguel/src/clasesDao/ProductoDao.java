@@ -62,7 +62,7 @@ public class ProductoDao {
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 
-				productos.add(new Producto(rs.getInt("idproducto"), rs.getString("nombre"), rs.getDouble("precio"),
+				productos.add(new Producto(rs.getInt("idproducto"),new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"), rs.getDouble("precio"),
 						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
 			}
 			rs.close();
@@ -73,12 +73,76 @@ public class ProductoDao {
 		}
 		return productos;
 	}
-
-	/**
-	 * Metodo para saber que productos tienen stock menor que 5
-	 * 
-	 * @return lista donde los productos tengan un stock inferior a 5
-	 */
+	
+	public static List<Producto> listaFiltro (Producto producto) {
+		List<Producto> productos = new ArrayList<Producto>();
+		try {
+			Connection con = util.Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement(
+					"select * from productos where nombre like '%?%';");
+			pst.setString(1, producto.getNombre());
+			pst.executeUpdate();
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				productos.add(new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+	
+	public static List<Producto> listaFiltro2 (Producto producto) {
+		List<Producto> productos = new ArrayList<Producto>();
+		try {
+			Connection con = util.Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement(
+					"select * from productos where color like '%?%' and talla like '%?%';");
+			pst.setString(1, producto.getColor());
+			pst.setString(2, producto.getTalla());
+			pst.executeUpdate();
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				productos.add(new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+	
+	public static List<Producto> listaFiltro3 (Producto producto) {
+		List<Producto> productos = new ArrayList<Producto>();
+		try {
+			Connection con = util.Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement(
+					"select * from productos where color like '%?%' and talla like '%?%' and nombre like '%?%';");
+			pst.setString(1, producto.getColor());
+			pst.setString(2, producto.getTalla());
+			pst.setString(3, producto.getNombre());
+			pst.executeUpdate();
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				productos.add(new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"), rs.getDouble("precio"),
+						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+	
 	public static List<Producto> listaStock() {
 		List<Producto> productos = new ArrayList<>();
 		try {
