@@ -135,6 +135,7 @@ public class FuncionesMenu {
 		String pro = "";
 		Boolean proBuscar = false;
 		int unidades = 0;
+		
 		do {
 			pro = funciones.dimeString("Introduce el nombre del producto (-1 para salir):", sc);
 			for (Producto p : ProductoDao.lista()) {
