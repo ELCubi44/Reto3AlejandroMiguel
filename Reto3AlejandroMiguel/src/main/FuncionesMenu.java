@@ -101,18 +101,8 @@ public class FuncionesMenu {
 		String talla = sc.nextLine();
 		pro.setTall(talla);
 
-		if (pro.getColor().equals("") && pro.getTalla().equals("")) {
-			for (Producto p : ProductoDao.listaFiltro(pro)) {
-				System.out.println(p);
-			}
-		} else if (pro.getNombre().equals("")) {
-			for (Producto p : ProductoDao.listaFiltro2(pro)) {
-				System.out.println(p);
-			}
-		} else {
-			for (Producto p : ProductoDao.listaFiltro3(pro)) {
-				System.out.println(p);
-			}
+		for (Producto p : ProductoDao.listaFiltro(pro)) {
+			System.out.println(p);
 		}
 
 	}
@@ -147,7 +137,7 @@ public class FuncionesMenu {
 				}
 			}
 			if (proBuscar) {
-				int cantidad = funciones.dimeEntero("¿Cuantas unidades quieres?", sc);
+				int cantidad = funciones.dimeEntero("ï¿½Cuantas unidades quieres?", sc);
 				if (producto.getStock() < cantidad) {
 					cantidad = producto.getStock();
 					System.out.println("No hay sufciente stock, aniadiendo las unidades restantes: " + cantidad);
@@ -166,7 +156,7 @@ public class FuncionesMenu {
 
 		} while (!pro.equalsIgnoreCase("-1"));
 
-		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\n¿Quieres usar esta direccion de envio?(s/n)",
+		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\nï¿½Quieres usar esta direccion de envio?(s/n)",
 				sc);
 		String dNueva = "";
 		if (opcion.equalsIgnoreCase("n")) {
