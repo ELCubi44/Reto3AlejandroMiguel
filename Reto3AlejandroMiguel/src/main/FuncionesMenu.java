@@ -1,7 +1,10 @@
 package main;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
 import clases.Categoria;
 import clases.Cliente;
@@ -87,7 +90,6 @@ public class FuncionesMenu {
 		}
 	}
 
-
 //	public static void buscarProd(Scanner sc) {
 //		Producto pro = new Producto();
 //		System.out.println("Introduce el nombre del producto:");
@@ -121,82 +123,51 @@ public class FuncionesMenu {
 	}
 
 	public static void crearPedido(Scanner sc) {
-		List<Cliente> clientes = ClienteDao.lista();
-		for (Cliente cliente : clientes) {
-			System.out.println(cliente);
-		}
-
-		int clienteBuscar;
-		boolean aux = false;
-		do {
-			clienteBuscar = funciones.dimeEntero("Elige una (Seleccione ID):", sc);
-			for (Cliente cliente : clientes) {
-				if (clienteBuscar == cliente.getIdCliente())
-					;
-				aux = true;
-			}
-		} while (aux == false);
-
-		for (Cliente cliente : clientes) {
-			if (clienteBuscar == cliente.getIdCliente())
-				;
-			{
-				System.out.println("Nombre: " + cliente.getIdCliente() + ", ID: " + clienteBuscar);
-			}
-		}
-
-		List<Producto> pedido = new ArrayList<Producto>();
-		do {
-			List<Producto> productos = ProductoDao.lista();
-			for (Producto producto : productos) {
-				System.out.println(producto);
-			}
-			int producto = funciones.dimeEntero("Elige un producto (Seleccione ID) o 0 para acabar", sc);
-			if (producto == 0)
-				break;
-			for (Producto producto2 : productos) {
-				if (producto2.getIdProducto() == producto) {
-					int unidades = funciones.dimeEntero("Cuantas unidades quieres", sc);
-					if (unidades > producto2.getStock()) {
-						unidades = producto2.getStock();
-						Producto productoPedido = new Producto(producto, unidades);
-						pedido.add(productoPedido);
-						ProductoDao.eliminarStock(producto, unidades);
-					} else if (unidades <= 0) {
-						System.out.println("Las unidades deben ser mas de 0");
-					} else {
-						Producto productoPedido = new Producto(producto, unidades);
-						pedido.add(productoPedido);
-						ProductoDao.eliminarStock(producto, unidades);
-					}
-				} else
-					System.out.println("Este Id no existe");
-			}
-		} while (true);
-
-		String direccion = "";
-
 		Cliente cliente = null;
-		for (Cliente cliente2 : clientes) {
-			if (cliente2.getIdCliente() == clienteBuscar) {
-				cliente = cliente2;
-				direccion = cliente2.getDireccion();
-				System.out.println(cliente2.getDireccion());
-				System.out.println("Esta es tu direccion de envio, ï¿½deseas cambiarla? (Si / No):");
-			}
-		}
-
+		Pedido pedido = null;
+		boolean buscar = false;
 		do {
-			String opcion = sc.nextLine().toLowerCase();
-			if (opcion.equals("si")) {
-				System.out.println("Escribe la nueva direccion de envio:");
-				direccion = sc.nextLine();
-				System.out.println("Direccion de envio actualizada");
-				break;
+			int codBuscar = funciones.dimeEntero("Introduce el codigo:", sc);
+			for (Cliente c : ClienteDao.lista()) {
+				if (codBuscar == c.getCodigo()) {
+					cliente = c;
+					buscar = true;
+				}
+			}
+		} while (buscar == false);
+		System.out.println(cliente.getNombre() + " " + cliente.getCodigo());
+		String pro = "";
+		Boolean proBuscar = false;
+		Producto producto = null;
+		do {
+			pro = funciones.dimeString("Introduce el nombre del producto (-1 para salir):", sc);
+			for (Producto p : ProductoDao.lista()) {
+				if (p.getNombre().equalsIgnoreCase(pro)) {
+					producto = p;
+					proBuscar = true;
+				}
+			}
+			if (proBuscar) {
+				int cantidad = funciones.dimeEntero("¿Cuantas unidades quieres?", sc);
+				if (producto.getStock() < cantidad) {
+					cantidad = producto.getStock();
+					System.out.println("No hay sufciente stock, añadiendo las unidades restantes: " + cantidad);
+					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
+				} else
+					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
 			} else
-				System.out.println("Seleccionada direccion de envio predeterminada");
-			break;
-		} while (true);
+				System.out.println("El producto no existe");
+
+		} while (!pro.equalsIgnoreCase("-1"));
+
+		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\n¿Quieres usar esta direccion de envio?(s/n)",
+				sc);
+		if (opcion.equalsIgnoreCase("n")) {
+			String dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
+			pedido.setDireccionEnvio(dNueva);
+		}
+		PedidoProducto pProducto = null;
+		pProducto.setIdPedidoProducto();
 
 		double precio = 0;
 		for (Producto producto : pedido) {
