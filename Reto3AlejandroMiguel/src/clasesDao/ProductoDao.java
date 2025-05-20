@@ -79,7 +79,7 @@ public class ProductoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"select * from productos where nombre like '%?%';");
+					"select * from productos where nombre like %?%;");
 			pst.setString(1, producto.getNombre());
 			pst.executeUpdate();
 			ResultSet rs = pst.executeQuery();
