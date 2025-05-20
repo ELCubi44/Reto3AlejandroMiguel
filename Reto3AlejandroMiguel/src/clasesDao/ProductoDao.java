@@ -79,8 +79,15 @@ public class ProductoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"select * from productos where nombre like %?%;");
-			pst.setString(1, producto.getNombre());
+					"select * from productos where (color = ? or ? = '') \r\n"
+					+ "and (talla = ? or ? = '') \r\n"
+					+ "and (nombre like '%?%' or ? = '');");
+			pst.setString(1, producto.getColor());
+			pst.setString(2, producto.getColor());
+			pst.setString(3, producto.getTalla());
+			pst.setString(4, producto.getTalla());
+			pst.setString(5, producto.getNombre());
+			pst.setString(6, producto.getNombre());
 			pst.executeUpdate();
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
