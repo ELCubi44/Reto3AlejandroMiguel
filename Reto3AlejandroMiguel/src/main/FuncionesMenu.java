@@ -12,6 +12,7 @@ import clases.PedidoProducto;
 import clases.Producto;
 import clasesDao.CategoriaDao;
 import clasesDao.ClienteDao;
+import clasesDao.PedidoDao;
 import clasesDao.PedidoProductoDao;
 import clasesDao.ProductoDao;
 import util.funciones;
@@ -135,8 +136,9 @@ public class FuncionesMenu {
 		String pro = "";
 		Boolean proBuscar = false;
 		int unidades = 0;
-		
+
 		do {
+			proBuscar = false;
 			pro = funciones.dimeString("Introduce el nombre del producto (-1 para salir):", sc);
 			for (Producto p : ProductoDao.lista()) {
 				if (p.getNombre().equalsIgnoreCase(pro)) {
@@ -176,6 +178,7 @@ public class FuncionesMenu {
 		pedido.setFecha(funciones.ldDate(LocalDate.now()));
 		pedido.setCliente(cliente);
 		pedido.setDireccionEnvio(dNueva);
+		PedidoDao.inserta(pedido);
 
 		for (int i = 0; i < productos.size(); i++) {
 			double precioProducto = productos.get(i).getStock() * productos.get(i).getPrecio();
@@ -190,10 +193,10 @@ public class FuncionesMenu {
 	public static void verPedidos() {
 		int mes = LocalDate.now().getMonthValue();
 		for (PedidoProducto p : PedidoProductoDao.listaFecha(mes)) {
-			System.out.println(p.getPedido().getFecha() + " " + p.getPedido().getCliente().getNombre() + " "
-					+ p.getPedido().getPrecioTotal() + " " + p.getPedido().getDireccionEnvio() + " "
-					+ p.getProducto().getCategoria().getIdCategoria() + " " + p.getProducto().getNombre() + " "
-					+ p.getUnidades());
+			System.out.println(p.getPedido().getFecha() + ", cliente " + p.getPedido().getCliente().getNombre()
+					+ " pedido de " + p.getPrecio() + " euros a " + p.getPedido().getDireccionEnvio() + " de categoria "
+					+ p.getProducto().getCategoria().getIdCategoria() + " de " + p.getProducto().getNombre() + " "
+					+ p.getUnidades() + " unidades");
 		}
 	}
 

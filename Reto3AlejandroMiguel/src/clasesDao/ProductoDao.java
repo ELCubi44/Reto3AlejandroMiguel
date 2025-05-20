@@ -58,7 +58,7 @@ public class ProductoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"SELECT idproducto,nombre,precio,descripcion,color,talla,stock FROM proyecto3ev.productos;");
+					"SELECT idproducto,idcategoria,nombre,precio,descripcion,color,talla,stock FROM proyecto3ev.productos;");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 
