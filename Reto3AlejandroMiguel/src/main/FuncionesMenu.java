@@ -2,7 +2,6 @@ package main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +12,6 @@ import clases.PedidoProducto;
 import clases.Producto;
 import clasesDao.CategoriaDao;
 import clasesDao.ClienteDao;
-import clasesDao.PedidoDao;
 import clasesDao.PedidoProductoDao;
 import clasesDao.ProductoDao;
 import util.funciones;
@@ -101,28 +99,28 @@ public class FuncionesMenu {
 		System.out.println("Introduce la talla del producto:");
 		String talla = sc.nextLine();
 		pro.setTall(talla);
-		
+
 		if (pro.getColor().equals("") && pro.getTalla().equals("")) {
 			for (Producto p : ProductoDao.listaFiltro(pro)) {
 				System.out.println(p);
 			}
-		}
-		else if (pro.getNombre().equals("")) {
+		} else if (pro.getNombre().equals("")) {
 			for (Producto p : ProductoDao.listaFiltro2(pro)) {
 				System.out.println(p);
 			}
-		}
-		else {
+		} else {
 			for (Producto p : ProductoDao.listaFiltro3(pro)) {
 				System.out.println(p);
 			}
 		}
 
-}
+	}
 
 	public static void crearPedido(Scanner sc) {
-		Cliente cliente = null;
-		Pedido pedido = null;
+		Cliente cliente = new Cliente();
+		Pedido pedido = new Pedido();
+		Producto producto = new Producto();
+		List<Producto> productos = new ArrayList<>();
 		boolean buscar = false;
 		do {
 			int codBuscar = funciones.dimeEntero("Introduce el codigo:", sc);
@@ -136,7 +134,7 @@ public class FuncionesMenu {
 		System.out.println(cliente.getNombre() + " " + cliente.getCodigo());
 		String pro = "";
 		Boolean proBuscar = false;
-		Producto producto = null;
+		int unidades = 0;
 		do {
 			pro = funciones.dimeString("Introduce el nombre del producto (-1 para salir):", sc);
 			for (Producto p : ProductoDao.lista()) {
@@ -146,42 +144,46 @@ public class FuncionesMenu {
 				}
 			}
 			if (proBuscar) {
-				int cantidad = funciones.dimeEntero("ï¿½Cuantas unidades quieres?", sc);
+				int cantidad = funciones.dimeEntero("¿Cuantas unidades quieres?", sc);
 				if (producto.getStock() < cantidad) {
 					cantidad = producto.getStock();
-					System.out.println("No hay sufciente stock, aï¿½adiendo las unidades restantes: " + cantidad);
+					System.out.println("No hay sufciente stock, aniadiendo las unidades restantes: " + cantidad);
 					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
-				} else
+					unidades += cantidad;
+					producto.setStock(cantidad);
+					productos.add(producto);
+				} else {
 					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
+					unidades += cantidad;
+					producto.setStock(cantidad);
+					productos.add(producto);
+				}
 			} else
 				System.out.println("El producto no existe");
 
 		} while (!pro.equalsIgnoreCase("-1"));
 
-		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\nï¿½Quieres usar esta direccion de envio?(s/n)",
+		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\n¿Quieres usar esta direccion de envio?(s/n)",
 				sc);
+		String dNueva = "";
 		if (opcion.equalsIgnoreCase("n")) {
-			String dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
-			pedido.setDireccionEnvio(dNueva);
-		}
-		PedidoProducto pProducto = null;
-		pProducto.setIdPedidoProducto();
+			dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
 
-		double precio = 0;
-		for (Producto producto : pedido) {
-			precio += (producto.getPrecio() * producto.getStock());
 		}
-		LocalDate now = LocalDate.now();
-		Date hoy = funciones.ldDate(now);
+		double precioT = unidades * producto.getPrecio();
+		pedido.setPrecioTotal(precioT);
+		pedido.setFecha(funciones.ldDate(LocalDate.now()));
+		pedido.setCliente(cliente);
+		pedido.setDireccionEnvio(dNueva);
 
-		Pedido pedido1 = new Pedido(cliente, precio, direccion, funciones.convierteFecha(hoy));
-		PedidoDao.inserta(pedido1);
-		for (int i = 0; i < pedido.size(); i++) {
-			PedidoProducto pedidoProducto = new PedidoProducto(pedido1, pedido.get(i), pedido.get(i).getStock(),
-					pedido.get(i).getPrecio() * pedido.get(i).getStock());
+		for (int i = 0; i < productos.size(); i++) {
+			double precioProducto = productos.get(i).getStock() * productos.get(i).getPrecio();
+			PedidoProducto pedidoProducto = new PedidoProducto(pedido, productos.get(i), productos.get(i).getStock(),
+					precioProducto);
 			PedidoProductoDao.inserta(pedidoProducto);
 		}
-		System.out.println("Pedido guardado, el precio total es: " + precio);
+		System.out.println("Pedido guardado, precio total= " + pedido.getPrecioTotal());
+
 	}
 
 	public static void verPedidos() {
