@@ -90,22 +90,6 @@ public class FuncionesMenu {
 		}
 	}
 
-//	public static void buscarProd(Scanner sc) {
-//		Producto pro = new Producto();
-//		System.out.println("Introduce el nombre del producto:");
-//		String nombre = sc.nextLine();
-//		pro.setNombre(nombre);
-//		System.out.println("Introduce el color del producto:");
-//		String color = sc.nextLine();
-//		pro.setColor(color);
-//		System.out.println("Introduce la talla del producto:");
-//		String talla = sc.nextLine();
-//		pro.setTall(talla);
-//		for (Producto p : lista) {
-//			System.out.println(p);
-//		}
-//	}
-
 	public static void buscarProd(Scanner sc) {
 		Producto pro = new Producto();
 		System.out.println("Introduce el nombre del producto:");
@@ -117,10 +101,24 @@ public class FuncionesMenu {
 		System.out.println("Introduce la talla del producto:");
 		String talla = sc.nextLine();
 		pro.setTall(talla);
-		for (Producto p : ProductoDao.listaProducto(nombre, color, talla)) {
-			System.out.println(p);
+		
+		if (pro.getColor().equals("") && pro.getTalla().equals("")) {
+			for (Producto p : ProductoDao.listaFiltro(pro)) {
+				System.out.println(p);
+			}
 		}
-	}
+		else if (pro.getNombre().equals("")) {
+			for (Producto p : ProductoDao.listaFiltro2(pro)) {
+				System.out.println(p);
+			}
+		}
+		else {
+			for (Producto p : ProductoDao.listaFiltro3(pro)) {
+				System.out.println(p);
+			}
+		}
+
+}
 
 	public static void crearPedido(Scanner sc) {
 		Cliente cliente = null;
@@ -148,10 +146,10 @@ public class FuncionesMenu {
 				}
 			}
 			if (proBuscar) {
-				int cantidad = funciones.dimeEntero("¿Cuantas unidades quieres?", sc);
+				int cantidad = funciones.dimeEntero("ï¿½Cuantas unidades quieres?", sc);
 				if (producto.getStock() < cantidad) {
 					cantidad = producto.getStock();
-					System.out.println("No hay sufciente stock, añadiendo las unidades restantes: " + cantidad);
+					System.out.println("No hay sufciente stock, aï¿½adiendo las unidades restantes: " + cantidad);
 					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
 				} else
 					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
@@ -160,7 +158,7 @@ public class FuncionesMenu {
 
 		} while (!pro.equalsIgnoreCase("-1"));
 
-		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\n¿Quieres usar esta direccion de envio?(s/n)",
+		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\nï¿½Quieres usar esta direccion de envio?(s/n)",
 				sc);
 		if (opcion.equalsIgnoreCase("n")) {
 			String dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
