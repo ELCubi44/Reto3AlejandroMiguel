@@ -114,6 +114,10 @@ public class FuncionesMenu {
 		List<Producto> productos = new ArrayList<>();
 		boolean buscar = false;
 
+		for (Cliente cliente2 : ClienteDao.lista()) {
+			System.out.println(cliente2);
+		}
+		
 		do {
 			int codBuscar = funciones.dimeEntero("Introduce el codigo:", sc);
 			for (Cliente c : ClienteDao.lista()) {
@@ -128,6 +132,10 @@ public class FuncionesMenu {
 		Boolean proBuscar = false;
 		int unidades = 0;
 
+		for (Producto producto2 : ProductoDao.lista()) {
+			System.out.println(producto2);
+		}
+		
 		do {
 			proBuscar = false;
 			pro = funciones.dimeString("Introduce el nombre del producto (-1 para salir):", sc);
@@ -138,7 +146,7 @@ public class FuncionesMenu {
 				}
 			}
 			if (proBuscar) {
-				int cantidad = funciones.dimeEntero("¿Cuantas unidades quieres?", sc);
+				int cantidad = funciones.dimeEntero("ï¿½Cuantas unidades quieres?", sc);
 				if (producto.getStock() < cantidad) {
 					cantidad = producto.getStock();
 					System.out.println("No hay suficiente stock, aniadiendo las unidades restantes: " + cantidad);
@@ -161,7 +169,7 @@ public class FuncionesMenu {
 		String opcion = "";
 		String dNueva = cliente.getDireccion();
 		do {
-			opcion = funciones.dimeString(cliente.getDireccion() + "\r\n¿Quieres usar esta direccion de envio?(s/n)",
+			opcion = funciones.dimeString(cliente.getDireccion() + "\r\nï¿½Quieres usar esta direccion de envio?(s/n)",
 					sc);
 			if (opcion.equalsIgnoreCase("n")) {
 				dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
