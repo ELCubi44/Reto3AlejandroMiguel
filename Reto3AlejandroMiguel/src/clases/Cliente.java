@@ -21,8 +21,6 @@ public class Cliente {
 	 * @param direccion
 	 * @param codigo
 	 */
-	
-	
 
 	public Cliente(int idCliente, String nombre, String direccion, int codigo) {
 		super();
@@ -31,11 +29,13 @@ public class Cliente {
 		this.direccion = direccion;
 		this.codigo = codigo;
 	}
+
 	public Cliente(String nombre, int codigo) {
 		super();
 		this.nombre = nombre;
 		this.codigo = codigo;
 	}
+
 	/**
 	 * 
 	 * @param nombre
@@ -60,6 +60,12 @@ public class Cliente {
 	 */
 	public Cliente() {
 		super();
+	}
+
+	public Cliente(int i, String nombre, String direccion) {
+		this.idCliente = i;
+		this.nombre = nombre;
+		this.direccion = direccion;
 	}
 
 	public int getIdCliente() {

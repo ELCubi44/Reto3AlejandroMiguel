@@ -53,9 +53,23 @@ public class FuncionesMenu {
 
 	public static void altaClientes(Scanner sc) {
 		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
-				funciones.dimeString("Introduce la direccion:", sc), funciones.dimeEntero("Introduce el codigo:", sc));
+				funciones.dimeString("Introduce la direccion:", sc));
+		int codCliente = 0;
+		boolean buscar;
+		do {
+			buscar = true;
+			codCliente = funciones.dimeEntero("Introduce el codigo:", sc);
+
+			for (Cliente c : ClienteDao.lista()) {
+				if (c.getCodigo() == codCliente) {
+					buscar = false;
+					System.out.println("El cliente ya existe, introduce otro:");
+				}
+			}
+		} while (buscar == false);
+		cliente.setCodigo(codCliente);
 		ClienteDao.inserta(cliente);
-		//que no repita codigo
+
 	}
 
 	public static void busCod(Scanner sc) {
@@ -68,7 +82,7 @@ public class FuncionesMenu {
 				buscar = true;
 			}
 		}
-		
+
 		if (buscar == false) {
 			System.out.println("No existe, creando uno nuevo...");
 			Cliente cliente = new Cliente();
@@ -121,7 +135,7 @@ public class FuncionesMenu {
 		List<Producto> productos = new ArrayList<>();
 		boolean buscar = false;
 
-		for (Cliente cliente2 : ClienteDao.lista()) {
+		for (Cliente cliente2 : ClienteDao.listaPedido()) {
 			System.out.println(cliente2);
 		}
 
@@ -138,8 +152,7 @@ public class FuncionesMenu {
 		String pro = "";
 		Boolean proBuscar = false;
 		int unidades = 0;
-
-		for (Producto producto2 : ProductoDao.lista()) {
+		for (Producto producto2 : ProductoDao.listaPedido()) {
 			System.out.println(producto2);
 		}
 
@@ -173,43 +186,57 @@ public class FuncionesMenu {
 			}
 
 		} while (!pro.equalsIgnoreCase("-1"));
-		String opcion = "";
-		String dNueva = cliente.getDireccion();
-		do {
-			opcion = funciones.dimeString(cliente.getDireccion() + "\r\n�Quieres usar esta direccion de envio?(s/n)",
-					sc);
-			if (opcion.equalsIgnoreCase("n")) {
-				dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
-			}
-			if (opcion.equalsIgnoreCase("s")) {
-				pedido.setDireccionEnvio(cliente.getDireccion());
-			}
-		} while (!opcion.equalsIgnoreCase("n") && !opcion.equalsIgnoreCase("s"));
-		double precioT = unidades * producto.getPrecio();
-		pedido.setPrecioTotal(precioT);
-		pedido.setFecha(funciones.ldDate(LocalDate.now()));
-		pedido.setCliente(cliente);
-		pedido.setDireccionEnvio(dNueva);
-		PedidoDao.inserta(pedido);
 
-		for (int i = 0; i < productos.size(); i++) {
-			double precioProducto = productos.get(i).getStock() * productos.get(i).getPrecio();
-			PedidoProducto pedidoProducto = new PedidoProducto(pedido, productos.get(i), productos.get(i).getStock(),
-					precioProducto);
-			PedidoProductoDao.inserta(pedidoProducto);
-		}
+		if (productos.size() != 0) {
+			String opcion = "";
+			String dNueva = cliente.getDireccion();
 
-		System.out.println("Pedido guardado, precio total= " + pedido.getPrecioTotal());
+			do {
+				opcion = funciones
+						.dimeString(cliente.getDireccion() + "\r\n�Quieres usar esta direccion de envio?(s/n)", sc);
+				if (opcion.equalsIgnoreCase("n")) {
+					dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
+				}
+				if (opcion.equalsIgnoreCase("s")) {
+					pedido.setDireccionEnvio(cliente.getDireccion());
+				}
+			} while (!opcion.equalsIgnoreCase("n") && !opcion.equalsIgnoreCase("s"));
+
+			double precioT = unidades * producto.getPrecio();
+			pedido.setPrecioTotal(precioT);
+			pedido.setFecha(funciones.ldDate(LocalDate.now()));
+			pedido.setCliente(cliente);
+			pedido.setDireccionEnvio(dNueva);
+
+			PedidoDao.inserta(pedido);
+
+			for (int i = 0; i < productos.size(); i++) {
+				double precioProducto = productos.get(i).getStock() * productos.get(i).getPrecio();
+				PedidoProducto pedidoProducto = new PedidoProducto(pedido, productos.get(i),
+						productos.get(i).getStock(), precioProducto);
+				PedidoProductoDao.inserta(pedidoProducto);
+			}
+
+			System.out.println("Pedido guardado, precio total= " + pedido.getPrecioTotal());
+		} else
+			System.out.println("Pedido cancelado");
 	}
 
 	public static void verPedidos() {
 		int mes = LocalDate.now().getMonthValue();
-		for (PedidoProducto p : PedidoProductoDao.listaFecha(mes)) {
-			System.out.println(p.getPedido().getFecha() + ", cliente " + p.getPedido().getCliente().getNombre()
-					+ " pedido de " + p.getPrecio() + " euros a " + p.getPedido().getDireccionEnvio() + " de categoria "
-					+ p.getProducto().getCategoria().getIdCategoria() + " de " + p.getProducto().getNombre() + " "
-					+ p.getUnidades() + " unidades");
+
+		for (Pedido p : PedidoDao.listaFecha(mes)) {
+
+			System.out.println(p.getFecha() + ", cliente " + p.getCliente().getNombre() + " pedido de "
+					+ p.getPrecioTotal() + " euros a " + p.getDireccionEnvio());
+
+			for (PedidoProducto pp : PedidoProductoDao.listaPedido(p)) {
+				System.out.println("1676");
+				System.out.println(pp.getProducto().getIdProducto() + pp.getProducto().getCategoria().getNombre()
+						+ pp.getProducto().getNombre() + pp.getUnidades());
+			}
 		}
+
 	}
 
 	public static void bajoStock(Scanner sc) {
@@ -217,12 +244,14 @@ public class FuncionesMenu {
 			System.out.println(p.getNombre() + " " + p.getCategoria().getIdCategoria() + " " + p.getDescripcion() + " "
 					+ p.getColor() + " " + p.getPrecio() + " " + p.getTalla() + " " + p.getStock());
 		}
-		int reponer = funciones.dimeEntero("�Cuantas unidades quieres reponer?", sc);
-		if (reponer <= 0) {
-			System.out.println("Nada que reponer");
-		} else
-			ProductoDao.aumentarStock(reponer);
-		System.out.println("Producto repuesto");
+		for (Producto p : ProductoDao.listaStock()) {
+			int reponer = funciones.dimeEntero("�Cuantas unidades quieres reponer de " + p.getNombre() + "?", sc);
+			if (reponer > 0) {
+				ProductoDao.aumentarStock(reponer);
+				System.out.println("Producto repuesto");
+			} else
+				System.out.println("Nada que reponer");
+		}
 	}
 
 	public static void pedidosCliente(Scanner sc) {
