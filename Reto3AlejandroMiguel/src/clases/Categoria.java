@@ -27,6 +27,11 @@ public class Categoria {
 	public Categoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
+	
+	public Categoria(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 	/**
 	* Constructor vacio
  	*/

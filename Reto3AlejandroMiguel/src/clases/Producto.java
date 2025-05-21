@@ -41,9 +41,14 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
-	
-	
 
+	public Producto(int idProducto, Categoria categoria, String nombre) {
+		super();
+		this.idProducto = idProducto;
+		this.categoria = categoria;
+		this.nombre = nombre;
+	}
+	
 	/**
 	 * Constructor que usamos para lista producto en productoDao sin categoria
 	 * 

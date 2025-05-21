@@ -147,11 +147,13 @@ public class PedidoProductoDao {
 		List<PedidoProducto> productos = new ArrayList<PedidoProducto>();
 		try {
 			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
-					"SELECT idproducto,unidades,precio FROM proyecto3ev.pedidoproducto where idpedido = ?;");
+					"SELECT pp.idproducto,pp.unidades,pp.precio,c.nombre,p.nombre FROM proyecto3ev.pedidoproducto pp "
+					+ "inner join productos p on p.idproducto = pp.idproducto"
+					+ "inner join categorias c on c.idcategoria = p.idcategoria where idpedido = ?;");
 			ps.setInt(1, pedido.getIdPedido());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				productos.add(new PedidoProducto( new Producto(rs.getInt("idproducto")),rs.getInt("unidades"),rs.getDouble("precio")));
+				productos.add(new PedidoProducto( new Producto(rs.getInt("idproducto"),new Categoria (rs.getString("c.nombre")),rs.getString("p.nombre")),rs.getInt("unidades"),rs.getDouble("precio")));
 			}
 			rs.close();
 
