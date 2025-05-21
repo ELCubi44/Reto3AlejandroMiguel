@@ -276,4 +276,25 @@ public class ProductoDao {
 		}
 		return productos;
 	}
+	
+	public static List<Producto> listaPedido() {
+		List<Producto> productos = new ArrayList<Producto>();
+		try {
+			Connection con = util.Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement(
+					"SELECT nombre,precio,color,talla,stock FROM proyecto3ev.productos;");
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+
+				productos.add(new Producto(rs.getString("nombre"), rs.getDouble("precio"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+	
 }

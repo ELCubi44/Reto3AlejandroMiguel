@@ -87,6 +87,15 @@ public class Producto {
 		this.stock = stock;
 	}
 
+	public Producto(String nombre, double precio, String color, String talla, int stock) {
+		super();
+		this.nombre = nombre;
+		this.precio = precio;
+		this.color = color;
+		this.talla = talla;
+		this.stock = stock;
+	}
+
 	/**
 	 * Constructor que usamos para bajar el stock de un producto en ProductoDao
 	 * 

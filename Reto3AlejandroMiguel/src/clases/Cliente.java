@@ -21,12 +21,19 @@ public class Cliente {
 	 * @param direccion
 	 * @param codigo
 	 */
+	
+	
 
 	public Cliente(int idCliente, String nombre, String direccion, int codigo) {
 		super();
 		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		this.codigo = codigo;
+	}
+	public Cliente(String nombre, int codigo) {
+		super();
+		this.nombre = nombre;
 		this.codigo = codigo;
 	}
 	/**

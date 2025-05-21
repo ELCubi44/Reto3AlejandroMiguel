@@ -40,6 +40,25 @@ public class ClienteDao {
 		}
 		return clientes;
 	}
+	
+	public static List<Cliente> listaPedido() {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			Connection con = util.Conexion.abreConexion();
+			PreparedStatement pst = con
+					.prepareStatement("SELECT nombre,codigo FROM proyecto3ev.clientes;");
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				clientes.add(new Cliente(rs.getString("nombre"), rs.getInt("codigo")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return clientes;
+	}
 
 	/**
 	 * Metodo que sirve oara insertar un cliente nuevo en la base de datos
