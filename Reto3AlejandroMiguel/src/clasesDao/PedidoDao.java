@@ -54,7 +54,7 @@ public class PedidoDao {
 			
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				pedidos.add(new Pedido(new Cliente(rs.getInt("c.nombre")),rs.getDouble("p.precioTotal"), rs.getString("p.direccionEnvio"), rs.getDate("p.fecha")));
+				pedidos.add(new Pedido(new Cliente(rs.getInt("nombre")),rs.getDouble("precioTotal"), rs.getString("direccionEnvio"), rs.getDate("fecha")));
 			}
 			rs.close();
 		} catch (Exception e) {
