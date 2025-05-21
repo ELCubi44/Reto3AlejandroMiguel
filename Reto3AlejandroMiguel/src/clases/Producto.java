@@ -41,6 +41,8 @@ public class Producto {
 		this.talla = talla;
 		this.stock = stock;
 	}
+	
+	
 
 	/**
 	 * Constructor que usamos para lista producto en productoDao sin categoria
