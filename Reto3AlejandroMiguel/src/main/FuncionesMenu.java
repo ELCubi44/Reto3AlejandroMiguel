@@ -37,19 +37,25 @@ public class FuncionesMenu {
 		for (Categoria c : CategoriaDao.lista()) {
 			System.out.println(c.getIdCategoria() + c.getNombre());
 		}
-		int idBuscar = funciones.dimeEntero("Selecciona una", sc);
-		for (Categoria c : CategoriaDao.lista()) {
-			if (c.getIdCategoria() == idBuscar) {
-				pro.setCategoria(c);
-				ProductoDao.inserta(pro);
+		boolean buscar = false;
+		do {
+			buscar = false;
+			int idBuscar = funciones.dimeEntero("Selecciona una", sc);
+			for (Categoria c : CategoriaDao.lista()) {
+				if (c.getIdCategoria() == idBuscar) {
+					buscar = true;
+					pro.setCategoria(c);
+					ProductoDao.inserta(pro);
+				}
 			}
-		}
+		} while (buscar == false);
 	}
 
 	public static void altaClientes(Scanner sc) {
 		Cliente cliente = new Cliente(0, funciones.dimeString("Introduce el nombre del cliente:", sc),
 				funciones.dimeString("Introduce la direccion:", sc), funciones.dimeEntero("Introduce el codigo:", sc));
 		ClienteDao.inserta(cliente);
+		//que no repita codigo
 	}
 
 	public static void busCod(Scanner sc) {
@@ -62,6 +68,7 @@ public class FuncionesMenu {
 				buscar = true;
 			}
 		}
+		
 		if (buscar == false) {
 			System.out.println("No existe, creando uno nuevo...");
 			Cliente cliente = new Cliente();
@@ -117,7 +124,7 @@ public class FuncionesMenu {
 		for (Cliente cliente2 : ClienteDao.lista()) {
 			System.out.println(cliente2);
 		}
-		
+
 		do {
 			int codBuscar = funciones.dimeEntero("Introduce el codigo:", sc);
 			for (Cliente c : ClienteDao.lista()) {
@@ -135,7 +142,7 @@ public class FuncionesMenu {
 		for (Producto producto2 : ProductoDao.lista()) {
 			System.out.println(producto2);
 		}
-		
+
 		do {
 			proBuscar = false;
 			pro = funciones.dimeString("Introduce el nombre del producto (-1 para salir):", sc);
