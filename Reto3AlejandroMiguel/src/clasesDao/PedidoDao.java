@@ -48,13 +48,13 @@ public class PedidoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"select p.fecha, c.nombre, p.precioTotal, p.direccionEnvio from pedidos "
+					"select p.idpedido, p.fecha, c.nombre, p.precioTotal, p.direccionEnvio from pedidos "
 					+ "p inner join clientes c on c.idcliente = p.idcliente where month (p.fecha) = ? order by p.fecha desc;");
 			pst.setInt(1, fecha);
 			
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				pedidos.add(new Pedido(new Cliente(rs.getString("nombre")),rs.getDouble("precioTotal"), rs.getString("direccionEnvio"), rs.getDate("fecha")));
+				pedidos.add(new Pedido(rs.getInt("idpedido"),new Cliente(rs.getString("nombre")),rs.getDouble("precioTotal"), rs.getString("direccionEnvio"), rs.getDate("fecha")));
 			}
 			rs.close();
 		} catch (Exception e) {
