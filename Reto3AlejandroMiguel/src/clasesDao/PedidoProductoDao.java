@@ -142,4 +142,25 @@ public class PedidoProductoDao {
 		}
 		return productos;
 	}
+	
+	public static List<PedidoProducto> listaPedido (Pedido pedido) {
+		List<PedidoProducto> productos = new ArrayList<PedidoProducto>();
+		try {
+			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
+					"SELECT idpedidoproducto,idproducto,unidades,precio FROM proyecto3ev.pedidoproducto where idpedido = ?;");
+			ps.setInt(1, pedido.getIdPedido());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				productos.add(new PedidoProducto(rs.getInt("idpedidoproducto"), new Producto(rs.getInt("idproducto")),rs.getInt("unidades"),rs.getDouble("precio")));
+			}
+			rs.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return productos;
+	}
+	
 }

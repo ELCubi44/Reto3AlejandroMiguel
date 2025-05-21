@@ -87,6 +87,8 @@ public class Producto {
 		this.stock = stock;
 	}
 
+	
+	
 	public Producto(String nombre, double precio, String color, String talla, int stock) {
 		super();
 		this.nombre = nombre;

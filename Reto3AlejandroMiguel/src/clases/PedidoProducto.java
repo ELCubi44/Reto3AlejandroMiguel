@@ -31,6 +31,16 @@ public class PedidoProducto {
 		this.precio = precio;
 	}
 	
+	public PedidoProducto(int idPedidoProducto, Producto producto, int unidades, double precio) {
+		super();
+		this.idPedidoProducto = idPedidoProducto;
+		this.producto = producto;
+		this.unidades = unidades;
+		this.precio = precio;
+	}
+
+
+
 	/**
 	 * Constructor para usar en producto mas vendido
 	 * @param producto
