@@ -55,33 +55,33 @@ public class PedidoProductoDao {
 	 * @param mes Mes actual(valor numerico)
 	 * @return Lista de pedidos, con los productos, realizados en el mes actual
 	 */
-	public static List<PedidoProducto> listaFecha(int mes) {
-		List<PedidoProducto> productos = new ArrayList<>();
-		try {
-			PreparedStatement ps = util.Conexion.abreConexion()
-					.prepareStatement("select *,d.nombre as nombrecliente,b.nombre as nombreproducto\r\n"
-							+ "from pedidoproducto a\r\n" + "inner join productos b on b.idproducto=a.idproducto\r\n"
-							+ "inner join pedidos c on c.idpedido=a.idpedido\r\n"
-							+ "inner join clientes d on d.idcliente=c.idcliente\r\n"
-							+ "where month(c.fecha)=? order by c.fecha desc");
-			ps.setInt(1, mes);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				productos.add(new PedidoProducto(rs.getInt("a.idpedidoproducto"),
-						new Pedido(new Cliente(rs.getString("nombrecliente")), rs.getInt("precioTotal"),
-								rs.getString("direccionenvio"), rs.getDate("fecha")),
-						new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombreproducto")),
-						rs.getInt("a.unidades"), rs.getDouble("a.precio")));
-			}
-			rs.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			Conexion.cierraConexion();
-		}
-		return productos;
-	}
+//	public static List<PedidoProducto> listaFecha(int mes) {
+//		List<PedidoProducto> productos = new ArrayList<>();
+//		try {
+//			PreparedStatement ps = util.Conexion.abreConexion()
+//					.prepareStatement("select *,d.nombre as nombrecliente,b.nombre as nombreproducto\r\n"
+//							+ "from pedidoproducto a\r\n" + "inner join productos b on b.idproducto=a.idproducto\r\n"
+//							+ "inner join pedidos c on c.idpedido=a.idpedido\r\n"
+//							+ "inner join clientes d on d.idcliente=c.idcliente\r\n"
+//							+ "where month(c.fecha)=? order by c.fecha desc");
+//			ps.setInt(1, mes);
+//			ResultSet rs = ps.executeQuery();
+//			while (rs.next()) {
+//				productos.add(new PedidoProducto(rs.getInt("a.idpedidoproducto"),
+//						new Pedido(new Cliente(rs.getString("nombrecliente")), rs.getInt("precioTotal"),
+//								rs.getString("direccionenvio"), rs.getDate("fecha")),
+//						new Producto(new Categoria(rs.getInt("idcategoria")), rs.getString("nombreproducto")),
+//						rs.getInt("a.unidades"), rs.getDouble("a.precio")));
+//			}
+//			rs.close();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			Conexion.cierraConexion();
+//		}
+//		return productos;
+//	}
 
 	/**
 	 * Metodo para conocer los pedidos y productos que ha realizado y comprado un
@@ -147,7 +147,7 @@ public class PedidoProductoDao {
 		List<PedidoProducto> productos = new ArrayList<PedidoProducto>();
 		try {
 			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
-					"SELECT idpedidoproducto,idproducto,unidades,precio FROM proyecto3ev.pedidoproducto where idpedido = ?;");
+					"SELECT idproducto,unidades,precio FROM proyecto3ev.pedidoproducto where idpedido = ?;");
 			ps.setInt(1, pedido.getIdPedido());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

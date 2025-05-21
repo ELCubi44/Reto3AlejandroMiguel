@@ -43,6 +43,28 @@ public class PedidoDao {
 		return pedidos;
 	}
 
+	public static List<Pedido> listaFecha(int fecha) {
+		List<Pedido> pedidos = new ArrayList<Pedido>();
+		try {
+			Connection con = util.Conexion.abreConexion();
+			PreparedStatement pst = con.prepareStatement(
+					"select p.fecha, c.nombre, p.precioTotal, p.direccionEnvio from pedidos "
+					+ "p inner join clientes c on c.idcliente = p.idcliente where month (p.fecha) = ? order by p.fecha desc;");
+			pst.setInt(1, fecha);
+			
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				pedidos.add(new Pedido(new Cliente(rs.getInt("c.nombre")),rs.getDouble("p.precioTotal"), rs.getString("p.direccionEnvio"), rs.getDate("p.fecha")));
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cierraConexion();
+		}
+		return pedidos;
+	}
+
 	/**
 	 * Metodo que inserta un pedido que nos pasan a la base de datos
 	 * 

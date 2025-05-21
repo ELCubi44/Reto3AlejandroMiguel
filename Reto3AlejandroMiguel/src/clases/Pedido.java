@@ -21,9 +21,10 @@ public class Pedido {
 	 * 
 	 * @param cliente        Cliente que realiza el pedido
 	 * @param precioTotal    Precio total del pedido
-	 * @param direccionEnvio Dirección a la que se realiza el pedido
+	 * @param direccionEnvio Direcciï¿½n a la que se realiza el pedido
 	 * @param fecha          Fecha en la que se realiza el pedido
 	 */
+	
 	public Pedido(Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
 		super();
 		this.cliente = cliente;
@@ -36,7 +37,7 @@ public class Pedido {
 	 * Constrictor con 3 parametros
 	 * 
 	 * @param precioTotal    Precio total del pedido
-	 * @param direccionEnvio Dirección a la que se realiza el pedido
+	 * @param direccionEnvio Direcciï¿½n a la que se realiza el pedido
 	 * @param fecha          Fecha en la que se realiza el pedido
 	 */
 	public Pedido(double precioTotal, String direccionEnvio, Date fecha) {
@@ -52,7 +53,7 @@ public class Pedido {
 	 * @param idPedido       ID unico del pedido
 	 * @param cliente        Cliente que realiza el pedido
 	 * @param precioTotal    Precio total del pedido
-	 * @param direccionEnvio Dirección a la que se realiza el pedido
+	 * @param direccionEnvio Direcciï¿½n a la que se realiza el pedido
 	 * @param fecha          Fecha en la que se realiza el pedido
 	 */
 	public Pedido(int idPedido, Cliente cliente, double precioTotal, String direccionEnvio, Date fecha) {
