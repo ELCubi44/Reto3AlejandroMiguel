@@ -148,7 +148,7 @@ public class PedidoProductoDao {
 		try {
 			PreparedStatement ps = util.Conexion.abreConexion().prepareStatement(
 					"SELECT pp.idproducto,pp.unidades,pp.precio,c.nombre,p.nombre FROM proyecto3ev.pedidoproducto pp "
-					+ "inner join productos p on p.idproducto = pp.idproducto"
+					+ "inner join productos p on p.idproducto = pp.idproducto "
 					+ "inner join categorias c on c.idcategoria = p.idcategoria where idpedido = ?;");
 			ps.setInt(1, pedido.getIdPedido());
 			ResultSet rs = ps.executeQuery();
