@@ -113,6 +113,7 @@ public class FuncionesMenu {
 		Producto producto = new Producto();
 		List<Producto> productos = new ArrayList<>();
 		boolean buscar = false;
+
 		do {
 			int codBuscar = funciones.dimeEntero("Introduce el codigo:", sc);
 			for (Cliente c : ClienteDao.lista()) {
@@ -137,10 +138,10 @@ public class FuncionesMenu {
 				}
 			}
 			if (proBuscar) {
-				int cantidad = funciones.dimeEntero("ï¿½Cuantas unidades quieres?", sc);
+				int cantidad = funciones.dimeEntero("¿Cuantas unidades quieres?", sc);
 				if (producto.getStock() < cantidad) {
 					cantidad = producto.getStock();
-					System.out.println("No hay sufciente stock, aniadiendo las unidades restantes: " + cantidad);
+					System.out.println("No hay suficiente stock, aniadiendo las unidades restantes: " + cantidad);
 					ProductoDao.eliminarStock(producto.getIdProducto(), cantidad);
 					unidades += cantidad;
 					producto.setStock(cantidad);
@@ -151,18 +152,24 @@ public class FuncionesMenu {
 					producto.setStock(cantidad);
 					productos.add(producto);
 				}
-			} else
+			}
+			if (proBuscar = false) {
 				System.out.println("El producto no existe");
+			}
 
 		} while (!pro.equalsIgnoreCase("-1"));
-
-		String opcion = funciones.dimeString(cliente.getDireccion() + "\r\nï¿½Quieres usar esta direccion de envio?(s/n)",
-				sc);
-		String dNueva = "";
-		if (opcion.equalsIgnoreCase("n")) {
-			dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
-
-		}
+		String opcion = "";
+		String dNueva = cliente.getDireccion();
+		do {
+			opcion = funciones.dimeString(cliente.getDireccion() + "\r\n¿Quieres usar esta direccion de envio?(s/n)",
+					sc);
+			if (opcion.equalsIgnoreCase("n")) {
+				dNueva = funciones.dimeString("Introduce la nueva direccion", sc);
+			}
+			if (opcion.equalsIgnoreCase("s")) {
+				pedido.setDireccionEnvio(cliente.getDireccion());
+			}
+		} while (!opcion.equalsIgnoreCase("n") && !opcion.equalsIgnoreCase("s"));
 		double precioT = unidades * producto.getPrecio();
 		pedido.setPrecioTotal(precioT);
 		pedido.setFecha(funciones.ldDate(LocalDate.now()));
@@ -176,8 +183,8 @@ public class FuncionesMenu {
 					precioProducto);
 			PedidoProductoDao.inserta(pedidoProducto);
 		}
-		System.out.println("Pedido guardado, precio total= " + pedido.getPrecioTotal());
 
+		System.out.println("Pedido guardado, precio total= " + pedido.getPrecioTotal());
 	}
 
 	public static void verPedidos() {
