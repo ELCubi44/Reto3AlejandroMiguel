@@ -151,7 +151,7 @@ public class PedidoProductoDao {
 			ps.setInt(1, pedido.getIdPedido());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				productos.add(new PedidoProducto(rs.getInt("idpedidoproducto"), new Producto(rs.getInt("idproducto")),rs.getInt("unidades"),rs.getDouble("precio")));
+				productos.add(new PedidoProducto( new Producto(rs.getInt("idproducto")),rs.getInt("unidades"),rs.getDouble("precio")));
 			}
 			rs.close();
 
