@@ -267,17 +267,18 @@ public class FuncionesMenu {
 			}
 		} while (aux==false);
 		
+		boolean aux2 = false;
 		for (Pedido pedido : PedidoDao.lista()) {
 			if (pedido.getCliente().getCodigo() == cliente) {
+				aux2 = true;
 				System.out.println("Peidido: "+pedido.getIdPedido()+", Fecha: "+pedido.getFecha()+", Precio Total: "+pedido.getPrecioTotal()+", Direccion envio:"+pedido.getDireccionEnvio());
 				for (PedidoProducto pedidoProducto : PedidoProductoDao.listaPcliente(cliente)) {
 					System.out.println("Producto: "+pedidoProducto.getProducto().getNombre()+", Categoria Producto: "+pedidoProducto.getProducto().getCategoria().getNombre()+", Unidades compradas: "+pedidoProducto.getUnidades());
 				}
 			}
-			else
-				System.out.println("Este cliente no tiene pedidos");
 		}
-		
+		if (aux2 == false)
+			System.out.println("Este cliente no tiene pedidos");
 	}
 
 	public static void productoMvendido() {
