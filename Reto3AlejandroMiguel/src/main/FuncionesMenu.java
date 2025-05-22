@@ -246,7 +246,6 @@ public class FuncionesMenu {
 		for (Producto p : ProductoDao.listaStock()) {
 			int reponer = funciones.dimeEntero("�Cuantas unidades quieres reponer de " + p.getNombre() + "?", sc);
 			if (reponer > 0) {
-				ProductoDao.aumentarStock(reponer);
 				System.out.println("Producto repuesto");
 			} else if (reponer <= 0)
 				System.out.println("Nada que reponer");
@@ -254,26 +253,31 @@ public class FuncionesMenu {
 	}
 
 	public static void pedidosCliente(Scanner sc) {
-		int id = funciones.dimeEntero("Introduce tu ID de cliente:", sc);
-		List<PedidoProducto> lista = PedidoProductoDao.listaPcliente(id);
-		boolean buscar = false;
-		for (Cliente c : ClienteDao.lista()) {
-			if (c.getIdCliente() == id) {
-				buscar = true;
-			}
+		System.out.println("Elige un cliente");
+		for (Cliente cliente : ClienteDao.lista()) {
+			System.out.println("Nombre: "+cliente.getNombre()+", Codigo: "+cliente.getCodigo());
 		}
-		if (buscar) {
-			if (lista != null) {
-				for (PedidoProducto p : lista) {
-					System.out.println(p.getPedido().getDireccionEnvio() + " " + p.getPedido().getFecha() + " "
-							+ p.getPedido().getPrecioTotal() + " " + p.getProducto().getCategoria().getIdCategoria()
-							+ " " + p.getProducto().getNombre() + " " + p.getProducto().getStock() + " "
-							+ p.getUnidades());
+		int cliente;
+		boolean aux=false;
+		do {
+			cliente = funciones.dimeEntero("Selecciona el codigo de cliente", sc);
+			for (Cliente cliente2 : ClienteDao.lista()) {
+				if (cliente == cliente2.getCodigo())
+					aux=true;
+			}
+		} while (aux==false);
+		
+		for (Pedido pedido : PedidoDao.lista()) {
+			if (pedido.getCliente().getCodigo() == cliente) {
+				System.out.println("Peidido: "+pedido.getIdPedido()+", Fecha: "+pedido.getFecha()+", Precio Total: "+pedido.getPrecioTotal()+", Direccion envio:"+pedido.getDireccionEnvio());
+				for (PedidoProducto pedidoProducto : PedidoProductoDao.listaPcliente(cliente)) {
+					System.out.println("Producto: "+pedidoProducto.getProducto().getNombre()+", Categoria Producto: "+pedidoProducto.getProducto().getCategoria().getNombre()+", Unidades compradas: "+pedidoProducto.getUnidades());
 				}
-			} else
-				System.out.println("Lista vacia");
-		} else
-			System.out.println("No existe cliente");
+			}
+			else
+				System.out.println("Este cliente no tiene pedidos");
+		}
+		
 	}
 
 	public static void productoMvendido() {
