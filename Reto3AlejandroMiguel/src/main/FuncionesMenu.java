@@ -88,7 +88,7 @@ public class FuncionesMenu {
 			Cliente cliente = new Cliente();
 			cliente.setNombre(funciones.dimeString("Introduce el nombre del cliente:", sc));
 			cliente.setDireccion(funciones.dimeString("Introduce la direccion:", sc));
-			cliente.setCodigo(funciones.dimeEntero("Introduce el codigo:", sc));
+			cliente.setCodigo(codBuscar);
 			ClienteDao.inserta(cliente);
 		}
 	}
@@ -136,7 +136,7 @@ public class FuncionesMenu {
 		boolean buscar = false;
 
 		for (Cliente cliente2 : ClienteDao.listaPedido()) {
-			System.out.println(cliente2);
+			System.out.println("Cliente: "+cliente2.getNombre()+", Codigo: "+cliente2.getCodigo());
 		}
 
 		do {
@@ -148,7 +148,7 @@ public class FuncionesMenu {
 				}
 			}
 		} while (buscar == false);
-		System.out.println(cliente.getNombre() + " " + cliente.getCodigo());
+		System.out.println("Nombre: "+cliente.getNombre() + ", Codigo: " + cliente.getCodigo());
 		String pro = "";
 		Boolean proBuscar = false;
 		int unidades = 0;
@@ -166,7 +166,7 @@ public class FuncionesMenu {
 				}
 			}
 			if (proBuscar) {
-				int cantidad = funciones.dimeEntero("�Cuantas unidades quieres?", sc);
+				int cantidad = funciones.dimeEntero("Cuantas unidades quieres?", sc);
 				if (producto.getStock() < cantidad) {
 					cantidad = producto.getStock();
 					System.out.println("No hay suficiente stock, aniadiendo las unidades restantes: " + cantidad);
@@ -231,8 +231,8 @@ public class FuncionesMenu {
 					+ p.getPrecioTotal() + " euros a " + p.getDireccionEnvio());
 
 			for (PedidoProducto pp : PedidoProductoDao.listaPedido(p)) {
-				System.out.println(pp.getProducto().getIdProducto() + pp.getProducto().getCategoria().getNombre()
-						+ pp.getProducto().getNombre() + pp.getUnidades());
+				System.out.println("Producto: "+pp.getProducto().getNombre() +", Categoria: "+ pp.getProducto().getCategoria().getNombre()
+						+", Unidades: "+ pp.getUnidades());
 			}
 		}
 
@@ -246,6 +246,7 @@ public class FuncionesMenu {
 		for (Producto p : ProductoDao.listaStock()) {
 			int reponer = funciones.dimeEntero("�Cuantas unidades quieres reponer de " + p.getNombre() + "?", sc);
 			if (reponer > 0) {
+				ProductoDao.aumentarStock(p.getIdProducto(),reponer);
 				System.out.println("Producto repuesto");
 			} else if (reponer <= 0)
 				System.out.println("Nada que reponer");
@@ -272,7 +273,7 @@ public class FuncionesMenu {
 			if (pedido.getCliente().getCodigo() == cliente) {
 				aux2 = true;
 				System.out.println("Peidido: "+pedido.getIdPedido()+", Fecha: "+pedido.getFecha()+", Precio Total: "+pedido.getPrecioTotal()+", Direccion envio:"+pedido.getDireccionEnvio());
-				for (PedidoProducto pedidoProducto : PedidoProductoDao.listaPcliente(cliente)) {
+				for (PedidoProducto pedidoProducto : PedidoProductoDao.listaPedido(pedido)) {
 					System.out.println("Producto: "+pedidoProducto.getProducto().getNombre()+", Categoria Producto: "+pedidoProducto.getProducto().getCategoria().getNombre()+", Unidades compradas: "+pedidoProducto.getUnidades());
 				}
 			}

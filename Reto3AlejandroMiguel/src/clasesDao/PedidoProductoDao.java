@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clases.Categoria;
-import clases.Cliente;
 import clases.Pedido;
 import clases.PedidoProducto;
 import clases.Producto;

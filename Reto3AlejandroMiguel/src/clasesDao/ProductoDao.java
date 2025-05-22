@@ -58,11 +58,11 @@ public class ProductoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"SELECT idproducto,idcategoria,nombre,precio,descripcion,color,talla,stock FROM proyecto3ev.productos;");
+					"SELECT idproducto,c.idcategoria,p.nombre,precio,descripcion,color,talla,stock,c.nombre FROM productos p inner join categorias c on c.idcategoria = p.idcategoria;");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 
-				productos.add(new Producto(rs.getInt("idproducto"),new Categoria(rs.getInt("idcategoria")), rs.getString("nombre"), rs.getDouble("precio"),
+				productos.add(new Producto(rs.getInt("idproducto"),new Categoria(rs.getInt("c.idcategoria"),rs.getString("c.nombre")), rs.getString("p.nombre"), rs.getDouble("precio"),
 						rs.getString("Descripcion"), rs.getString("color"), rs.getString("talla"), rs.getInt("stock")));
 			}
 			rs.close();
@@ -209,8 +209,8 @@ public class ProductoDao {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con
 					.prepareStatement("UPDATE proyecto3ev.productos SET stock = (stock - ?) WHERE (idproducto = ?)");
-			pst.setInt(1, producto);
-			pst.setInt(2, unidades);
+			pst.setInt(1, unidades);
+			pst.setInt(2, producto);
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -225,12 +225,13 @@ public class ProductoDao {
 	 * 
 	 * @param unidades, las unidades que queremos aumentar nos las pasan
 	 */
-	public static void aumentarStock(int unidades) {
+	public static void aumentarStock(int producto, int unidades) {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con
-					.prepareStatement("UPDATE proyecto3ev.productos SET stock = (stock + ?) WHERE stock<5");
+					.prepareStatement("UPDATE proyecto3ev.productos SET stock = (stock + ?) WHERE idproducto = ?");
 			pst.setInt(1, unidades);
+			pst.setInt(2, producto);
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

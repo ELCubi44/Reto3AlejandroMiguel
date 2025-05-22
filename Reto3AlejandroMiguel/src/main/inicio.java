@@ -10,7 +10,7 @@ public class inicio {
 		int opcion = 0;
 		do {
 			opcion = funciones.dimeEntero(
-					"Menu:\r\n1-Mantenimientos\r\n2-Catalogo de productos\r\n3-Pedidos\r\n4-Informes\r\n5-Salir", sc);
+					"\r\nMenu:\r\n1-Mantenimientos\r\n2-Catalogo de productos\r\n3-Pedidos\r\n4-Informes\r\n5-Salir", sc);
 			switch (opcion) {
 			case 1:
 				submenu1(sc);

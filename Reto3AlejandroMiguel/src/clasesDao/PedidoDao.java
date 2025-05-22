@@ -28,10 +28,11 @@ public class PedidoDao {
 		try {
 			Connection con = util.Conexion.abreConexion();
 			PreparedStatement pst = con.prepareStatement(
-					"SELECT idpedido,idcliente,precioTotal,direccionEnvio,fecha FROM proyecto3ev.pedidos;");
+					"SELECT idpedido,p.idcliente,codigo,precioTotal,direccionEnvio,fecha FROM pedidos p "
+					+ "inner join clientes c on p.idcliente = c.idcliente;");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				pedidos.add(new Pedido(rs.getInt("idpedido"), new Cliente(rs.getInt("idcliente")),
+				pedidos.add(new Pedido(rs.getInt("idpedido"), new Cliente(rs.getInt("p.idcliente"),rs.getInt("codigo")),
 						rs.getDouble("precioTotal"), rs.getString("direccionEnvio"), rs.getDate("fecha")));
 			}
 			rs.close();
