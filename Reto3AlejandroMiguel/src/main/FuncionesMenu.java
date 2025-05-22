@@ -248,7 +248,7 @@ public class FuncionesMenu {
 			if (reponer > 0) {
 				ProductoDao.aumentarStock(reponer);
 				System.out.println("Producto repuesto");
-			} else
+			} else if (reponer <= 0)
 				System.out.println("Nada que reponer");
 		}
 	}
