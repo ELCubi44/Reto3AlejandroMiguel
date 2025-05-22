@@ -153,7 +153,7 @@ public class FuncionesMenu {
 		Boolean proBuscar = false;
 		int unidades = 0;
 		for (Producto producto2 : ProductoDao.listaPedido()) {
-			System.out.println(producto2);
+			System.out.println("Nombre: "+producto2.getNombre()+", Color: "+producto2.getColor()+", Talla: "+producto2.getTalla()+", Precio (Unidad)"+producto2.getPrecio()+", Stock: "+producto2.getStock());
 		}
 
 		do {
