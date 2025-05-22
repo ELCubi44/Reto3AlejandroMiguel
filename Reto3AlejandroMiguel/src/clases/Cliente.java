@@ -11,7 +11,7 @@ public class Cliente {
 	private String nombre;
 	private String direccion;
 	private int codigo;
-
+ 
 	/**
 	 * Constructor con todos las variables para crear Clientes con todos los
 	 * parametros

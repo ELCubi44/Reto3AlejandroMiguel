@@ -21,7 +21,7 @@ public class ClienteDao {
 	 * 
 	 * @return una lista con los clientes de la base de datos
 	 */
-	public static List<Cliente> lista() {
+	public static List<Cliente> lista() { 
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			Connection con = util.Conexion.abreConexion();

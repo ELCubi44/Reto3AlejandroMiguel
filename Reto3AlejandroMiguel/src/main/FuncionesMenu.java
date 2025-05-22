@@ -123,11 +123,11 @@ public class FuncionesMenu {
 		pro.setTall(talla);
 
 		for (Producto p : ProductoDao.listaFiltro(pro)) {
-			System.out.println(p);
+			System.out.println(p); 
 		}
 
 	}
-
+ 
 	public static void crearPedido(Scanner sc) {
 		Cliente cliente = new Cliente();
 		Pedido pedido = new Pedido();
@@ -143,7 +143,7 @@ public class FuncionesMenu {
 			int codBuscar = funciones.dimeEntero("Introduce el codigo:", sc);
 			for (Cliente c : ClienteDao.lista()) {
 				if (codBuscar == c.getCodigo()) {
-					cliente = c;
+					cliente = c; 
 					buscar = true;
 				}
 			}

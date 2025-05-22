@@ -13,7 +13,7 @@ public class PedidoProducto {
 	private Producto producto;
 	private int unidades;
 	private double precio;
-
+ 
 	/**
 	 * Constructor con todos los parametros para crear PedidoProducto
 	 * 

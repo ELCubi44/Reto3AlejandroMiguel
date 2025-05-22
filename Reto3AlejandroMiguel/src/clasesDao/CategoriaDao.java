@@ -29,7 +29,7 @@ public class CategoriaDao {
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				categorias.add(new Categoria(rs.getInt("idcategoria"), rs.getString("nombre")));
-			}
+			} 
 			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();

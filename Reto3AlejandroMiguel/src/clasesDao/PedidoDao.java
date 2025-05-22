@@ -36,7 +36,7 @@ public class PedidoDao {
 						rs.getDouble("precioTotal"), rs.getString("direccionEnvio"), rs.getDate("fecha")));
 			}
 			rs.close();
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			e.printStackTrace();
 		} finally {
 			Conexion.cierraConexion();

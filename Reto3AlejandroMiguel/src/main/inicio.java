@@ -42,7 +42,7 @@ public class inicio {
 					"1-Gestion de categorias\r\n2-Gestion de productos\r\n3-Gestion de clientes\r\n4-Volver", sc);
 			switch (opcion) {
 			case 1:
-				FuncionesMenu.gestionCat(sc);
+				FuncionesMenu.gestionCat(sc); 
 				break;
 			case 2:
 				FuncionesMenu.gestionPro(sc);

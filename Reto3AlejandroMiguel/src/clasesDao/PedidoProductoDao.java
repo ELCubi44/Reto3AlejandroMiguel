@@ -22,7 +22,7 @@ public class PedidoProductoDao {
 	/**
 	 * Inserta un pedido que ya nos lo pasa creado
 	 * 
-	 * @param pedido nos lo pasan ya creado
+	 * @param pedido nos lo pasan ya creado 
 	 */
 	public static void inserta(PedidoProducto pedido) {
 		try {

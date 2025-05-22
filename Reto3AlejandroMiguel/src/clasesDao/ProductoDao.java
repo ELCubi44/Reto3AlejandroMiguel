@@ -69,7 +69,7 @@ public class ProductoDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			Conexion.cierraConexion();
+			Conexion.cierraConexion(); 
 		}
 		return productos;
 	}

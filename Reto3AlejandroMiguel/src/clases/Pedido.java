@@ -15,7 +15,7 @@ public class Pedido {
 	private double precioTotal;
 	private String direccionEnvio;
 	private Date fecha;
-
+ 
 	/**
 	 * Constructor con 4 parametros para crear pedidos
 	 * 

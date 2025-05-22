@@ -17,7 +17,7 @@ public class Producto {
 	private String talla;
 	private int stock;
 
-	/**
+	/** 
 	 * Constructor con todos los parametros para crear un producto
 	 * 
 	 * @param idProducto  ID unico del producto
