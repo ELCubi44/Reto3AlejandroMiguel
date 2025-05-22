@@ -231,7 +231,6 @@ public class FuncionesMenu {
 					+ p.getPrecioTotal() + " euros a " + p.getDireccionEnvio());
 
 			for (PedidoProducto pp : PedidoProductoDao.listaPedido(p)) {
-				System.out.println("1676");
 				System.out.println(pp.getProducto().getIdProducto() + pp.getProducto().getCategoria().getNombre()
 						+ pp.getProducto().getNombre() + pp.getUnidades());
 			}
